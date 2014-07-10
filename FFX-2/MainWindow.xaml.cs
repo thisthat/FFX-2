@@ -32,9 +32,6 @@ namespace FFX_2
            
         }
 
-       
-
-        
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -44,5 +41,49 @@ namespace FFX_2
             Storyboard.SetTarget(sb, this.percentageComplete);
             sb.Begin();
         }
+
+        private void btn_sel_yuna_Click(object sender, RoutedEventArgs e)
+        {    
+            CheckBox tmp = null;
+            UIElementCollection controls = grid_looksfere_yuna.Children;
+            foreach (Control c in controls)
+            {
+                if (c is CheckBox)
+                {
+                    tmp = (CheckBox) c;
+                    tmp.IsChecked = true;
+                }
+            }
+        }
+
+        private void btn_sel_rikku_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox tmp = null;
+            UIElementCollection controls = grid_looksfere_rikku.Children;
+            foreach (Control c in controls)
+            {
+                if (c is CheckBox)
+                {
+                    tmp = (CheckBox)c;
+                    tmp.IsChecked = true;
+                }
+            }
+        }
+
+        private void btn_sel_paine_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox tmp = null;
+            UIElementCollection controls = grid_looksfere_paine.Children;
+            foreach (Control c in controls)
+            {
+                if (c is CheckBox)
+                {
+                    tmp = (CheckBox)c;
+                    tmp.IsChecked = true;
+                }
+            }
+        }
+
+      
     }
 }

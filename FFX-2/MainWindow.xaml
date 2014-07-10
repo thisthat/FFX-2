@@ -257,44 +257,44 @@
 		<TabControl HorizontalAlignment="Left" Width="461" Margin="0,0,0,22.667" SelectionChanged="TabControl_SelectionChanged">
 			<TabItem x:Name="homeTab" Header="Home" Height="22" VerticalAlignment="Top">
 				<Grid>
-					<Image HorizontalAlignment="Left" Height="334.666" VerticalAlignment="Top" Width="398.667" Source="pack://siteoforigin:,,,/Img/logoFFX-2.png" Margin="87.333,-98.667,-31,-21.666" StretchDirection="DownOnly" Stretch="UniformToFill"/>
+					<Image HorizontalAlignment="Left" Height="334.666" VerticalAlignment="Top" Width="398.667" Source="Img/logoFFX-2.png" Margin="87.333,-98.667,-31,-21.666" StretchDirection="DownOnly" Stretch="UniformToFill" Opacity="0.295"/>
 					<Label Content="Guil:" HorizontalAlignment="Left" Height="25" Margin="10,27.001,0,0" VerticalAlignment="Top" Width="39"/>
 					<Label Content="Tempo:" HorizontalAlignment="Left" Height="25" Margin="10,54.002,0,0" VerticalAlignment="Top" Width="99"/>
-					<xctk:DecimalUpDown FormatString="N0" Increment="1" Maximum="9999999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,29,0,0" Width="124" Watermark="Guil"/>
-					<xctk:TimeSpanUpDown HorizontalAlignment="Left" Height="21" Margin="74,57,0,0" VerticalAlignment="Top" Width="124" DefaultValue="0" Watermark="Tempo Di Gioco"/>
-					<CheckBox Content="99 Elm Inventario" HorizontalAlignment="Left" Height="17.333" Margin="74,84.002,0,0" VerticalAlignment="Top" Width="124" FontWeight="Bold"/>
-					<CheckBox Content="99 Elm Accessori" HorizontalAlignment="Left" Height="17.333" Margin="74,101.335,0,0" VerticalAlignment="Top" Width="124" FontWeight="Bold"/>
+					<xctk:DecimalUpDown x:Name="txtGuil" FormatString="N0" Increment="1" Maximum="9999999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,29,0,0" Width="124" Watermark="Guil"/>
+					<xctk:TimeSpanUpDown x:Name="txtTime" HorizontalAlignment="Left" Height="21" Margin="74,57,0,0" VerticalAlignment="Top" Width="124" DefaultValue="0" Watermark="Tempo Di Gioco"/>
+					<CheckBox x:Name="chkInventario" Content="99 Elm Inventario" HorizontalAlignment="Left" Height="17.333" Margin="74,84.002,0,0" VerticalAlignment="Top" Width="124"/>
+					<CheckBox x:Name="chkAccessori" Content="99 Elm Accessori" HorizontalAlignment="Left" Height="17.333" Margin="74,101.335,0,0" VerticalAlignment="Top" Width="124"/>
 					<ProgressBar x:Name="percentageComplete"
                    Template="{StaticResource PieProgressTemplate}"
                    Value="0"
                    Minimum="0"
                    Maximum="1" Margin="0,0,35.334,43.929" Width="130" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
-					<Label Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,11.05,-12.667,0" VerticalAlignment="Top" Width="162.667" FontWeight="Bold"/>
+					<Label Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,11.05,-12.667,0" VerticalAlignment="Top" Width="162.667"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Yuna">
 				<Grid Margin="0,0,1,1">
 					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/yuna.jpg" Stretch="UniformToFill" Margin="124.667,0,0,0"/>
-					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
-						<Grid Margin="-6,-2.96,-6,-6">
-							<CheckBox Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Floralia" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
-							<Button Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111"/>
+					<GroupBox x:Name="looksfere_yuna" Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
+						<Grid x:Name="grid_looksfere_yuna" Margin="-6,-2.96,-6,-6">
+							<CheckBox x:Name="pistolera_yuna" Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="bandita_yuna" Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="guerriera_yuna" Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="soubrette_yuna" Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="festaiola_yuna" Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="psichica_yuna" Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="nerarcano_yuna" Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="biancarcano_yuna" Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="magipistolera_yuna" Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="cavalierenero_yuna" Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="berserker_yuna" Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="alchimista_yuna" Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="deafortunata_yuna" Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="domatrice_yuna" Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="samurai_yuna" Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="mascotte_yuna" Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="floralia_yuna" Content="Floralia" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<Button x:Name="btn_sel_yuna" Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111" Click="btn_sel_yuna_Click"/>
 						</Grid>
 					</GroupBox>
 					<GroupBox Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
@@ -305,25 +305,25 @@
 				<Grid Margin="0,0,1,1">
 					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/rikku.jpg" Stretch="UniformToFill" Margin="124.667,0,0,0"/>
 					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
-						<Grid Margin="-6,-2.96,-6,-6">
-							<CheckBox Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Automastino" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
-							<Button Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111"/>
+						<Grid x:Name="grid_looksfere_rikku" Margin="-6,-2.96,-6,-6">
+							<CheckBox x:Name="pistolera_rikku" Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="bandita_rikku" Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="guerriera_rikku" Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="soubrette_rikku" Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="festaiola_rikku" Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="psichica_rikku" Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="nerarcano_rikku" Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="biancarcano_rikku" Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="magipistolera_rikku" Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="cavalierenero_rikku" Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="berserker_rikku" Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="alcimista_rikku" Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="deafortunata_rikku" Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="domatrice_rikku" Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="samurai_rikku" Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="mascotte_rikku" Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="automatino_rikku" Content="Automastino" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<Button x:Name="btn_sel_rikku" Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111" Click="btn_sel_rikku_Click"/>
 						</Grid>
 					</GroupBox>
 					<GroupBox Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
@@ -333,25 +333,25 @@
 				<Grid Margin="0,0,1,1">
 					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="327.333" Source="Img/paine.jpg" Stretch="UniformToFill" Margin="151.346,0,-24.679,0"/>
 					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
-						<Grid Margin="-6,-2.96,-6,-6">
-							<CheckBox Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
-							<CheckBox Content="Suprema" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
-							<Button Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111"/>
+						<Grid x:Name="grid_looksfere_paine" Margin="-6,-2.96,-6,-6">
+							<CheckBox x:Name="pistolera_paine" Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="bandita_paine" Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="guerriera_paine" Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="soubrette_paine" Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="festaiola_paine" Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="psichica_paine" Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="nerarcano_paine" Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="biancarcano_paine" Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="magipistolera_paine" Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="cavalierenero_paine" Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="berserker_paine" Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="alchimista_paine" Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="deafortunata_paine" Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="domatrice_paine" Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="samurai_paine" Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="mascotte_paine" Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox x:Name="suprema_paine" Content="Suprema" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<Button x:Name="btn_sel_paine" Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111" Click="btn_sel_paine_Click"/>
 						</Grid>
 					</GroupBox>
 					<GroupBox Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
