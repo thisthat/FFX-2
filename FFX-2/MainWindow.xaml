@@ -1,8 +1,372 @@
-﻿<Window x:Class="FFX_2.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="FFX_2.MainWindow"
+        Title="MainWindow" Height="298" Width="469" Loaded="Window_Loaded">
+    <Window.Resources>
         
-    </Grid>
+
+        <SolidColorBrush x:Key="ScrollBarDisabledBackground" Color="#F4F4F4"/>
+       
+        <Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+           
+        	<Setter Property="OverridesDefaultStyle" Value="true"/>
+           
+        	<Setter Property="Background" Value="Transparent"/>
+           
+        	<Setter Property="Focusable" Value="false"/>
+           
+        	<Setter Property="IsTabStop" Value="false"/>
+           
+        	<Setter Property="Template">
+            
+        		<Setter.Value>
+                   
+        			<ControlTemplate TargetType="{x:Type RepeatButton}">
+                 
+        				<Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+                      
+        			</ControlTemplate>
+                 
+        		</Setter.Value>
+              
+        	</Setter>
+           
+        </Style>
+        
+        <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+           
+        	<Setter Property="OverridesDefaultStyle" Value="true"/>
+           
+        	<Setter Property="IsTabStop" Value="false"/>
+            
+        	<Setter Property="Template">
+               
+        		<Setter.Value>
+                  
+        			<ControlTemplate TargetType="{x:Type Thumb}">
+                      
+        				<Border Background="#FF868686" BorderThickness="0,0,1,0" Height="Auto" CornerRadius="4" />
+                    
+        			</ControlTemplate>
+                    
+        		</Setter.Value>
+             
+        	</Setter>
+          
+        </Style>
+       
+        <Style x:Key="HorizontalScrollStyle" TargetType="{x:Type ScrollBar}">
+            
+        	<Setter Property="Background" Value="Transparent"/>
+           
+        	<Setter Property="Template">
+              
+        		<Setter.Value>
+                   
+        			<ControlTemplate TargetType="{x:Type ScrollBar}">
+                       
+        				<Grid x:Name="Bg" Background="{TemplateBinding Background}" Height="10" SnapsToDevicePixels="true">
+                         
+        					<Grid.RowDefinitions>
+                             
+        						<RowDefinition />
+                               
+        					</Grid.RowDefinitions>
+                           
+        					<Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
+                               
+        						<Track.DecreaseRepeatButton>
+                                   
+        							<RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                                   
+        						</Track.DecreaseRepeatButton>
+                               
+        						<Track.IncreaseRepeatButton>
+                                    
+        							<RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                                    
+        						</Track.IncreaseRepeatButton>
+                                
+        						<Track.Thumb>
+                                   
+        							<Thumb Style="{StaticResource ScrollBarThumb}" Cursor="Hand"/>
+                                    
+        						</Track.Thumb>
+                               
+        					</Track>
+                          
+        				</Grid>
+                        
+        				<ControlTemplate.Triggers>
+                          
+        					<Trigger Property="IsEnabled" Value="false">
+                                
+        						<Setter Property="Background" TargetName="Bg" Value="{StaticResource ScrollBarDisabledBackground}"/>
+                               
+        					</Trigger>
+                          
+        				</ControlTemplate.Triggers>
+                      
+        			</ControlTemplate>
+                 
+        		</Setter.Value>
+               
+        	</Setter>
+          
+        </Style>
+       
+        <Style x:Key="AppleStyleVerticalScrollBarStyle" TargetType="{x:Type ScrollBar}">
+            
+        	<Setter Property="Template">
+                
+        		<Setter.Value>
+                  
+        			<ControlTemplate TargetType="{x:Type ScrollBar}">
+                      
+        				<Grid x:Name="Bg" SnapsToDevicePixels="true" Width="10" HorizontalAlignment="Right" Margin="0">
+                          
+        					<Grid.RowDefinitions>
+                               
+        						<RowDefinition />
+                              
+        					</Grid.RowDefinitions>
+                            
+        					<Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
+                              
+        						<Track.DecreaseRepeatButton>
+                                   
+        							<RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}" />
+                                  
+        						</Track.DecreaseRepeatButton>
+                              
+        						<Track.IncreaseRepeatButton>
+                                    
+        							<RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                                  
+        						</Track.IncreaseRepeatButton>
+                               
+        						<Track.Thumb>
+                                  
+        							<Thumb Style="{DynamicResource ScrollBarThumb}" Cursor="Hand"/>
+                                   
+        						</Track.Thumb>
+                                
+        					</Track>
+                           
+        				</Grid>
+                     
+        			</ControlTemplate>
+                   
+        		</Setter.Value>
+             
+        	</Setter>
+           
+        </Style>
+       
+        <ControlTemplate x:Key="AppleStyleScrollBarStyle" TargetType="{x:Type ScrollViewer}">
+           
+        	<Grid x:Name="Grid" Background="{TemplateBinding Background}">
+             
+        		<Grid.ColumnDefinitions>
+                    
+        			<ColumnDefinition Width="*"/>
+                    
+        			<ColumnDefinition Width="Auto"/>
+                   
+        		</Grid.ColumnDefinitions>
+               
+        		<Grid.RowDefinitions>
+                   
+        			<RowDefinition Height="*"/>
+                    
+        			<RowDefinition Height="Auto"/>
+                   
+        		</Grid.RowDefinitions>
+                
+        		<Rectangle x:Name="Corner" Grid.Column="1" Fill="{x:Null}" Grid.Row="1"/>
+             
+        		<ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}"   
+        			CanHorizontallyScroll="False" CanVerticallyScroll="False"   
+        			ContentTemplate="{TemplateBinding ContentTemplate}"   
+        			Content="{TemplateBinding Content}" Grid.Column="0"   
+        			Margin="{TemplateBinding Padding}" Grid.Row="0"/>
+        
+        		<ScrollBar x:Name="PART_VerticalScrollBar" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"   
+        			AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1"   
+        			Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0"   
+        			Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"   
+        			ViewportSize="{TemplateBinding ViewportHeight}" Style="{DynamicResource AppleStyleVerticalScrollBarStyle}"   
+        			Background="{x:Null}" Width="Auto" Margin="0"/>
+  
+        		<ScrollBar x:Name="PART_HorizontalScrollBar" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"   
+        			AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0"   
+        			Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1"   
+        			Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"   
+        			ViewportSize="{TemplateBinding ViewportWidth}" Style="{DynamicResource HorizontalScrollStyle}"/>
+
+        	</Grid>
+
+        </ControlTemplate>
+		<ControlTemplate x:Key="PieProgressTemplate"
+                       TargetType="{x:Type ProgressBar}">
+         <Grid>
+            <xctk:Pie x:Name="Pie"
+                      Fill="MediumAquamarine"
+                      HorizontalAlignment="Stretch"
+                      Width="Auto"
+                      StrokeThickness="4"
+                      Slice="{TemplateBinding Value}"
+                      RenderTransformOrigin="0.5,0.5">
+               <xctk:Pie.RenderTransform>
+                  <RotateTransform Angle="-90" />
+               </xctk:Pie.RenderTransform>
+            </xctk:Pie>
+            <Ellipse Fill="White"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Width="70"
+                     Height="70" />
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+               <TextBlock  FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Text="{Binding ElementName=Pie, Path=Slice, StringFormat=#%}" />
+            </StackPanel>
+         </Grid>
+      </ControlTemplate>
+	  <Storyboard x:Key="SimulateProgressStoryboard"
+                  Duration="00:00:04"
+                  AccelerationRatio="0.5"
+                  DecelerationRatio="0.5">
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                        Storyboard.TargetName="percentageComplete"
+                                        Storyboard.TargetProperty="(RangeBase.Value)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00"
+                                  Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:04"
+                                  Value="1" />
+         </DoubleAnimationUsingKeyFrames>
+      </Storyboard>
+    </Window.Resources>
+
+	<Grid>
+		<TabControl HorizontalAlignment="Left" Width="461" Margin="0,0,0,22.667" SelectionChanged="TabControl_SelectionChanged">
+			<TabItem x:Name="homeTab" Header="Home" Height="22" VerticalAlignment="Top">
+				<Grid>
+					<Image HorizontalAlignment="Left" Height="334.666" VerticalAlignment="Top" Width="398.667" Source="pack://siteoforigin:,,,/Img/logoFFX-2.png" Margin="87.333,-98.667,-31,-21.666" StretchDirection="DownOnly" Stretch="UniformToFill"/>
+					<Label Content="Guil:" HorizontalAlignment="Left" Height="25" Margin="10,27.001,0,0" VerticalAlignment="Top" Width="39"/>
+					<Label Content="Tempo:" HorizontalAlignment="Left" Height="25" Margin="10,54.002,0,0" VerticalAlignment="Top" Width="99"/>
+					<xctk:DecimalUpDown FormatString="N0" Increment="1" Maximum="9999999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,29,0,0" Width="124" Watermark="Guil"/>
+					<xctk:TimeSpanUpDown HorizontalAlignment="Left" Height="21" Margin="74,57,0,0" VerticalAlignment="Top" Width="124" DefaultValue="0" Watermark="Tempo Di Gioco"/>
+					<CheckBox Content="99 Elm Inventario" HorizontalAlignment="Left" Height="17.333" Margin="74,84.002,0,0" VerticalAlignment="Top" Width="124" FontWeight="Bold"/>
+					<CheckBox Content="99 Elm Accessori" HorizontalAlignment="Left" Height="17.333" Margin="74,101.335,0,0" VerticalAlignment="Top" Width="124" FontWeight="Bold"/>
+					<ProgressBar x:Name="percentageComplete"
+                   Template="{StaticResource PieProgressTemplate}"
+                   Value="0"
+                   Minimum="0"
+                   Maximum="1" Margin="0,0,35.334,43.929" Width="130" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+					<Label Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,11.05,-12.667,0" VerticalAlignment="Top" Width="162.667" FontWeight="Bold"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Yuna">
+				<Grid Margin="0,0,1,1">
+					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/yuna.jpg" Stretch="UniformToFill" Margin="124.667,0,0,0"/>
+					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
+						<Grid Margin="-6,-2.96,-6,-6">
+							<CheckBox Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Floralia" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<Button Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111"/>
+						</Grid>
+					</GroupBox>
+					<GroupBox Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+					
+				</Grid>
+			</TabItem>
+			<TabItem Header="Rikku">
+				<Grid Margin="0,0,1,1">
+					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/rikku.jpg" Stretch="UniformToFill" Margin="124.667,0,0,0"/>
+					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
+						<Grid Margin="-6,-2.96,-6,-6">
+							<CheckBox Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Automastino" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<Button Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111"/>
+						</Grid>
+					</GroupBox>
+					<GroupBox Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Paine">
+				<Grid Margin="0,0,1,1">
+					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="327.333" Source="Img/paine.jpg" Stretch="UniformToFill" Margin="151.346,0,-24.679,0"/>
+					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
+						<Grid Margin="-6,-2.96,-6,-6">
+							<CheckBox Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Bandita" HorizontalAlignment="Left" Height="19" Margin="10,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Guerriera" HorizontalAlignment="Left" Height="19" Margin="10,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Soubrette" HorizontalAlignment="Left" Height="19" Margin="10,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Festaiola" HorizontalAlignment="Left" Height="19" Margin="10,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Psichica" HorizontalAlignment="Left" Height="19" Margin="10,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Nerarcano" HorizontalAlignment="Left" Height="19" Margin="10,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Biancarcano" HorizontalAlignment="Left" Height="19" Margin="10,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Magipistolera" HorizontalAlignment="Left" Height="19" Margin="10,158,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Cavaliere Nero" HorizontalAlignment="Left" Height="19" Margin="120,5,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Berserker" HorizontalAlignment="Left" Height="19" Margin="120,24,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Alchimista" HorizontalAlignment="Left" Height="19" Margin="120,43,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Dea Fortunata" HorizontalAlignment="Left" Height="19" Margin="120,62,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Domatrice" HorizontalAlignment="Left" Height="19" Margin="120,81,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Samurai" HorizontalAlignment="Left" Height="19" Margin="120,100,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Mascotte" HorizontalAlignment="Left" Height="19" Margin="120,119,0,0" VerticalAlignment="Top" Width="105"/>
+							<CheckBox Content="Suprema" HorizontalAlignment="Left" Height="19" Margin="120,139,0,0" VerticalAlignment="Top" Width="105"/>
+							<Button Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111"/>
+						</Grid>
+					</GroupBox>
+					<GroupBox Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+		<StatusBar HorizontalAlignment="Left" Height="32.667" Margin="0,230.333,0,0" VerticalAlignment="Top" Width="461">
+			<Grid Height="32.667" Width="461">
+				<Button Content="Load" HorizontalAlignment="Left" Height="22.667" VerticalAlignment="Top" Width="103.667" Margin="6.67,0,0,0"/>
+				<Button Content="Save" HorizontalAlignment="Left" Height="22.667" VerticalAlignment="Top" Width="103.667" Margin="347.333,0,0,0"/>
+				
+				<xctk:WatermarkTextBox Watermark="Hex Value" TextWrapping="Wrap" Text="" Margin="185.166,0,185.167,10" HorizontalContentAlignment="Center" />
+			</Grid>
+			
+		</StatusBar>
+
+	</Grid>
 </Window>

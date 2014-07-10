@@ -9,9 +9,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace FFX_2
 {
@@ -23,6 +25,24 @@ namespace FFX_2
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+       
+
+        
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Storyboard sb = this.FindResource("SimulateProgressStoryboard") as Storyboard;
+            DoubleAnimationUsingKeyFrames child = sb.Children[0] as DoubleAnimationUsingKeyFrames;
+            child.KeyFrames[1].Value = 0.4;
+            Storyboard.SetTarget(sb, this.percentageComplete);
+            sb.Begin();
         }
     }
 }
