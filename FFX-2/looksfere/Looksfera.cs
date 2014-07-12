@@ -17,18 +17,11 @@ namespace FFX_2.looksfere
         public bool LastPoint = true;
 
 
-        internal List<Offset> offset_yuna;
-        internal List<Offset> offset_rikku;
-        internal List<Offset> offset_paine;
+        internal List<Offset> offset_yuna = new List<Offset>();
+        internal List<Offset> offset_rikku = new List<Offset>();
+        internal List<Offset> offset_paine = new List<Offset>();
         internal YRP pg;
-        internal int Hex2Dec(string hex)
-        {
-            return Convert.ToInt32(hex, 16);
-        }
-        internal byte Hex2Byte(string hex)
-        {
-            return Convert.ToByte(hex, 16);
-        }
+        
 
 
         public void write(byte[] file)
@@ -43,8 +36,8 @@ namespace FFX_2.looksfere
             }
             foreach (Offset off in offset)
             {
-                int search = Hex2Dec(off.Search);
-                byte value = Hex2Byte(off.Value);
+                int search = FFX_2.Utility.Hex2Dec(off.Search);
+                byte value = FFX_2.Utility.Hex2Byte(off.Value);
                 if (LastPoint) { value--; }
                 file[search] = value;
             }
