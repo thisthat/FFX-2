@@ -29,10 +29,18 @@ namespace FFX_2
 
         GeneralOffset home;
         HandleEncript handleExternalProccess = new HandleEncript();
+        bool isDecript = false;
+        Microsoft.Win32.RegistryKey key;
 
         public MainWindow()
         {
             InitializeComponent();
+            //Registro di sys per la path di default
+            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("TTFFX-2", true);
+            if (key == null)
+            {
+                key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("TTFFX-2");
+            }
         }
 
 
@@ -85,6 +93,16 @@ namespace FFX_2
 
         void refresh_ui()
         {
+            if (isDecript)
+            {
+                btnSave.IsEnabled = true;
+                btnLoad.IsEnabled = false;
+            }
+            else
+            {
+                btnSave.IsEnabled = false;
+                btnLoad.IsEnabled = true;
+            }
             if (home == null) return;
             Storyboard sb = this.FindResource("SimulateProgressStoryboard") as Storyboard;
             DoubleAnimationUsingKeyFrames child = sb.Children[0] as DoubleAnimationUsingKeyFrames;
@@ -95,24 +113,39 @@ namespace FFX_2
             TimeSpan time = TimeSpan.FromSeconds(home.Time);
             txtTime.Value = time;
             txtGuil.Value = home.Guil;
+            txtYunaRun.Value = home.RunYuna;
+            txtRikkuRun.Value = home.RunRikku;
+            txtPaineRun.Value = home.RunPaine;
+        }
+        private void reset_ui()
+        {
+            btnSave.IsEnabled = false;
+            btnLoad.IsEnabled = true;
+            Storyboard sb = this.FindResource("SimulateProgressStoryboard") as Storyboard;
+            DoubleAnimationUsingKeyFrames child = sb.Children[0] as DoubleAnimationUsingKeyFrames;
+            float val = 0;
+            child.KeyFrames[1].Value = val;
+            Storyboard.SetTarget(sb, this.percentageComplete);
+            sb.Begin();
+            txtTime.Text = "";
+            txtGuil.Text = "";
+            txtYunaRun.Text = "";
+            txtRikkuRun.Text = "";
+            txtPaineRun.Text = "";
         }
 
-        private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            // TODO: aggiungere l'implementazione del gestore dell'evento in questa posizione.
-            handleExternalProccess.Encript();
-        }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
-            //dialog.SelectedPath = readPath();
+            dialog.SelectedPath = key.GetValue("last_path") as string;
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result.ToString() != "OK")
             {
                 return;
             }
             path = dialog.SelectedPath;
+            key.SetValue("last_path", path, Microsoft.Win32.RegistryValueKind.String);
             //Ora è decriptato
             string filename = path + "/SAVES";
             if (!File.Exists(filename))
@@ -123,21 +156,47 @@ namespace FFX_2
             //Se arriviamo qua, i files esistono e dobbiamo decriptarli
             handleExternalProccess.setPath(path);
             handleExternalProccess.Decript();
+            isDecript = true;
             //A questo punto possiamo iniziare i lavori
             file = File.ReadAllBytes(filename);
-            home = new GeneralOffset(file);
+            home = new GeneralOffset(file,path);
+            //Apriamo il memory sum checker ora
+            handleExternalProccess.MSC();
+            refresh_ui();
+        }
+
+        private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            //In questo punto vediamo se fare item e accessori
+            if (chkAccessori.IsChecked.Value && home != null)
+            {
+                home.setAccessori();
+            }
+            //Patchiamo
+            home.Patch(txtChecksum.Text);
+            handleExternalProccess.Encript();
+
+            //Ripristiniamo tutto
+            isDecript = false;
+            home = null;
+            handleExternalProccess.Dispose();
+            reset_ui();
             refresh_ui();
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            if (isDecript)
+            {
+                handleExternalProccess.Encript();
+            }
             handleExternalProccess.Dispose();
         }
 
         private void txtGuil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var guil = Convert.ToInt32(txtGuil.Text.Replace(".",""));
             if (home == null) return;
+            var guil = Convert.ToInt32(txtGuil.Text.Replace(".", ""));
             home.Guil = guil;
         }
 
@@ -146,5 +205,38 @@ namespace FFX_2
             if (home == null) return;
             home.Time = (int)(txtTime.Value.Value.TotalSeconds);
         }
+
+        private void chkInventario_Checked(object sender, RoutedEventArgs e)
+        {
+            if (home == null) return;
+            chkInventario.IsEnabled = false;
+            home.setInventario();
+        }
+        private void chkAccessori_Checked(object sender, RoutedEventArgs e)
+        {
+            if (home == null) return;
+            chkAccessori.IsEnabled = false;
+            home.setAccessori();
+        }
+
+        private void txtYunaRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            home.RunYuna = (byte)txtYunaRun.Value;
+        }
+
+        private void txtRikkuRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            home.RunRikku = (byte)txtRikkuRun.Value;
+        }
+
+        private void txtPaineRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            home.RunPaine = (byte)txtPaineRun.Value;
+        }
+
+        
     }
 }

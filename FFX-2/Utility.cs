@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,22 +25,27 @@ namespace FFX_2
         {
             string hex = guil.ToString("X4");
             int distanza = 8 - hex.Length;
+            string pad = "";
             for (int i = 0; i < distanza; i++)
             {
-                hex += "0";
+                pad += "0";
             }
-            return hex;
+            return pad + hex;
         }
 
-        internal static string Time2Hex(int p)
+        public static string Time2Hex(int p)
         {
             string hex = p.ToString("X4");
             int distanza = 8 - hex.Length;
+            string pad = "";
             for (int i = 0; i < distanza; i++)
             {
-                hex += "0";
+                pad += "0";
             }
-            return hex;
+            return pad + hex;
+        }
+        public static void writeFile(byte[] file,string path){
+            File.WriteAllBytes(path + "/SAVES", file);
         }
     }
 }

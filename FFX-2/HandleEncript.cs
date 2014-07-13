@@ -69,6 +69,7 @@ namespace FFX_2
         {
             try
             {
+                sum.Kill();
                 sum.Close();
                 sum.Dispose();
             }

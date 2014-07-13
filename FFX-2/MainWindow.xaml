@@ -258,18 +258,24 @@
 			<TabItem x:Name="homeTab" Header="Home" Height="22" VerticalAlignment="Top">
 				<Grid>
 					<Image HorizontalAlignment="Left" Height="334.666" VerticalAlignment="Top" Width="398.667" Source="Img/logoFFX-2.png" Margin="87.333,-98.667,-31,-21.666" StretchDirection="DownOnly" Stretch="UniformToFill" Opacity="0.295"/>
-					<Label Content="Guil:" HorizontalAlignment="Left" Height="25" Margin="10,27.001,0,0" VerticalAlignment="Top" Width="39"/>
-					<Label Content="Tempo:" HorizontalAlignment="Left" Height="25" Margin="10,54.002,0,0" VerticalAlignment="Top" Width="99"/>
-					<xctk:DecimalUpDown x:Name="txtGuil" FormatString="N0" Increment="1" Maximum="999999999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,29,0,0" Width="124" Watermark="Guil" ValueChanged="txtGuil_ValueChanged"/>
-					<xctk:TimeSpanUpDown x:Name="txtTime" HorizontalAlignment="Left" Height="21" Margin="74,57,0,0" VerticalAlignment="Top" Width="124" DefaultValue="0" Watermark="Tempo Di Gioco" ValueChanged="txtTime_ValueChanged"/>
-					<CheckBox x:Name="chkInventario" Content="99 Elm Inventario" HorizontalAlignment="Left" Height="17.333" Margin="74,84.002,0,0" VerticalAlignment="Top" Width="124"/>
-					<CheckBox x:Name="chkAccessori" Content="99 Elm Accessori" HorizontalAlignment="Left" Height="17.333" Margin="74,101.335,0,0" VerticalAlignment="Top" Width="124"/>
+					<Label Content="Guil:" HorizontalAlignment="Left" Height="25" Margin="5.331,18.997,0,0" VerticalAlignment="Top" Width="39"/>
+					<Label Content="Tempo:" HorizontalAlignment="Left" Height="25" Margin="5.331,45.998,0,0" VerticalAlignment="Top" Width="99"/>
+					<xctk:DecimalUpDown x:Name="txtGuil" FormatString="N0" Increment="1" Maximum="999999999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,20.996,0,0" Width="124" Watermark="Guil" ValueChanged="txtGuil_ValueChanged"/>
+					<xctk:TimeSpanUpDown x:Name="txtTime" HorizontalAlignment="Left" Height="21" Margin="74,48.996,0,0" VerticalAlignment="Top" Width="124" DefaultValue="0" Watermark="Tempo Di Gioco" ValueChanged="txtTime_ValueChanged"/>
+					<CheckBox x:Name="chkInventario" Content="99 Elm Inventario" HorizontalAlignment="Left" Height="17.333" Margin="74,75.998,0,0" VerticalAlignment="Top" Width="124" Checked="chkInventario_Checked"/>
+					<CheckBox x:Name="chkAccessori" Content="99 Elm Accessori" HorizontalAlignment="Left" Height="17.333" Margin="74,93.331,0,0" VerticalAlignment="Top" Width="124" Checked="chkAccessori_Checked"/>
 					<ProgressBar x:Name="percentageComplete"
                    Template="{StaticResource PieProgressTemplate}"
                    Value="0"
                    Minimum="0"
                    Maximum="1" Margin="0,0,35.334,43.929" Width="130" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
 					<Label Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,11.05,-12.667,0" VerticalAlignment="Top" Width="162.667"/>
+					<xctk:DecimalUpDown x:Name="txtYunaRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,115.664,0,0" Width="124" Watermark="Fughe Yuna" ValueChanged="txtYunaRun_ValueChanged" />
+					<xctk:DecimalUpDown x:Name="txtRikkuRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,143.664,0,0" Width="124" Watermark="Fughe Rikku" ValueChanged="txtRikkuRun_ValueChanged" />
+					<xctk:DecimalUpDown x:Name="txtPaineRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,171.664,0,0" Width="124" Watermark="Fughe Paine" ValueChanged="txtPaineRun_ValueChanged" />
+					<Label Content="Fuga Yuna:" HorizontalAlignment="Left" Height="26" Margin="5.331,113.664,0,0" VerticalAlignment="Top" Width="99"/>
+					<Label Content="Fuga Rikku:" HorizontalAlignment="Left" Height="26" Margin="5.331,141.664,0,0" VerticalAlignment="Top" Width="99"/>
+					<Label Content="Fuga Paine:" HorizontalAlignment="Left" Height="26" Margin="5.331,170.184,0,0" VerticalAlignment="Top" Width="99"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Yuna">
@@ -363,7 +369,7 @@
 				<Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left" Height="22.667" VerticalAlignment="Top" Width="103.667" Margin="6.67,0,0,0" Click="btnLoad_Click"/>
 				<Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="22.667" VerticalAlignment="Top" Width="103.667" Margin="347.333,0,0,0" Click="btnSave_Click"/>
 				
-				<xctk:WatermarkTextBox x:Name="txtChecksum" Watermark="Hex Value" TextWrapping="Wrap" Text="" Margin="185.166,0,185.167,10" HorizontalContentAlignment="Center" />
+				<xctk:WatermarkTextBox x:Name="txtChecksum" Watermark="Hex Value" TextWrapping="Wrap" Text="" Margin="184.499,0.353,185.834,9.647" HorizontalContentAlignment="Center" />
 			</Grid>
 			
 		</StatusBar>

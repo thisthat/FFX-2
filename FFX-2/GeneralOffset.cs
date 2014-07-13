@@ -12,18 +12,21 @@ namespace FFX_2
         int offset_percentage = 12;
         int offset_time = 16;
         int offset_guil = 30744;
-        int offset_inventario = 31616;
-        int offset_accessori = 32192;
         int offset_run_yuna = 33328;
         int offset_run_rikku = 33456;
         int offset_run_paine = 33584;
-
+        int offset_inventario = 31616;
+        int offset_accessori = 32192;
+        int offset_patch_first = 0x1A;
+        int offset_patch_second = 0x16268;
 
         byte[] file;
+        string path;
 
-        public GeneralOffset(byte[] f)
+        public GeneralOffset(byte[] f,string p)
         {
             this.file = f;
+            this.path = p;
         }
 
         public int Percentage
@@ -33,25 +36,40 @@ namespace FFX_2
                 return this.file[offset_percentage];
             }
         }
-        public int RunYuna
+        public byte RunYuna
         {
             get
             {
                 return this.file[offset_run_yuna];
             }
+            set
+            {
+                this.file[offset_run_yuna] = value;
+                Utility.writeFile(this.file,path);
+            }
         }
-        public int RunRikku
+        public byte RunRikku
         {
             get
             {
                 return this.file[offset_run_rikku];
             }
+            set
+            {
+                this.file[offset_run_rikku] = value;
+                Utility.writeFile(this.file, path);
+            }
         }
-        public int RunPaine
+        public byte RunPaine
         {
             get
             {
                 return this.file[offset_run_paine];
+            }
+            set
+            {
+                this.file[offset_run_paine] = value;
+                Utility.writeFile(this.file, path);
             }
         }
         public int Time
@@ -76,6 +94,7 @@ namespace FFX_2
                 this.file[offset_time + 1] = Utility.Hex2Byte(_b2);
                 this.file[offset_time + 2] = Utility.Hex2Byte(_b3);
                 this.file[offset_time + 3] = Utility.Hex2Byte(_b4);
+                Utility.writeFile(this.file, path);
             }
         }
         public int Guil
@@ -100,7 +119,44 @@ namespace FFX_2
                 this.file[offset_guil + 1] = Utility.Hex2Byte(_b2);
                 this.file[offset_guil + 2] = Utility.Hex2Byte(_b3);
                 this.file[offset_guil + 3] = Utility.Hex2Byte(_b4);
+                Utility.writeFile(this.file, path);
             }
+        }
+
+        public void setAccessori()
+        {
+            //Modifichiamo gli accessori
+            int start = offset_accessori;
+            while (file[start] != 0)
+            {
+                Console.WriteLine(file[start]);
+                file[start] = 99;
+                start++;
+            }
+            Utility.writeFile(this.file, path);
+        }
+        public void setInventario()
+        {
+            //Modifichiamo gli oggetti
+            int start = offset_inventario;
+            while (file[start] != 0)
+            {
+                Console.WriteLine(file[start]);
+                file[start] = 99;
+                start++;
+            }
+            Utility.writeFile(this.file, path);
+        }
+
+        public void Patch(string bytePatch)
+        {
+            byte _b1 = Utility.Hex2Byte(bytePatch.Substring(0, 2));
+            byte _b2 = Utility.Hex2Byte(bytePatch.Substring(2));
+            file[offset_patch_first + 0] = _b1;
+            file[offset_patch_first + 1] = _b2;
+            file[offset_patch_second + 0] = _b1;
+            file[offset_patch_second + 1] = _b2;
+            Utility.writeFile(this.file, path);
         }
 
     }
