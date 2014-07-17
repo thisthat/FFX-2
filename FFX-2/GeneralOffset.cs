@@ -23,10 +23,13 @@ namespace FFX_2
         byte[] file;
         string path;
 
-        public GeneralOffset(byte[] f,string p)
+        CRC checksum;
+
+        public GeneralOffset(byte[] f,string p, CRC checksum)
         {
             this.file = f;
             this.path = p;
+            this.checksum = checksum;
         }
 
         public int Percentage
@@ -45,7 +48,7 @@ namespace FFX_2
             set
             {
                 this.file[offset_run_yuna] = value;
-                Utility.writeFile(this.file,path);
+                this.checksum.SetChecksum();
             }
         }
         public byte RunRikku

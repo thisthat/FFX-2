@@ -84,7 +84,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CRC.cs" />
     <Compile Include="HandleEncript.cs" />
+    <Compile Include="Personaggi\Paine.cs" />
+    <Compile Include="Personaggi\Rikku.cs" />
+    <Compile Include="Personaggi\Yuna.cs" />
     <Compile Include="Utility.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

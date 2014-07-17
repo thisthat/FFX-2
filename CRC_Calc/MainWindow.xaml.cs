@@ -27,41 +27,42 @@ namespace CRC_Calc
         {
             InitializeComponent();
             //Ora è decriptato
-            string filename = "C:\\Users\\this\\Desktop\\FFX\\save\\BLES01880X-2_DIR--------------5/SAVES";
+            string filename = "C:\\Users\\this_that\\Desktop\\FFX\\save\\BLES01880X-2_DIR--------------4/SAVES";
             file = File.ReadAllBytes(filename);
-            Crc16 c = new Crc16();
-            byte[] test = new byte[90731 - 64+1];
             //file[90727] = 0;
             //file[90728] = 0;
             //file[90729] = 0;
             //file[90730] = 0;
-            var x = c.ComputeChecksum(file);
-            Console.WriteLine(x.ToString("X4"));
+            file[0x16268] = 0;
+            file[0x16269] = 0;
+            //var x = c.ComputeChecksum(file);
+
+            Crc16Ccitt x = new Crc16Ccitt(InitialCrcValue.NonZero1);
+            Console.WriteLine(x.ComputeChecksum(file).ToString("X4") + " - " + file.Length);
             this.Close();
         }
 
+     
+
     }
 
-    public enum InitialCrcValue { Zeros, NonZero1 = 0xffff, NonZero2 = 0x1021 }
+    public enum InitialCrcValue { Zeros, NonZero1 = 0xffff, NonZero2 = 0x1D0F }
 
     public class Crc16Ccitt
     {
-        const ushort poly = 4129;
+        const ushort poly = 0x1021;
         ushort[] table = new ushort[256];
         ushort initialValue = 0;
 
         public ushort ComputeChecksum(byte[] bytes)
         {
-            ushort crc = 0xffff;
-            //0x40 = 64
-            //0x1626B = 90.731
-            bytes[0x16268] = 0;
-            bytes[0x16269] = 0;
-            for (int i = 0x40; i <= 0x1626B; ++i)
+            ushort crc = this.initialValue;
+            var l = 0x1626B;
+            for (int i = 0x40; i <= l; ++i)
             {
                 crc = (ushort)((crc << 8) ^ table[((crc >> 8) ^ (0xff & bytes[i]))]);
             }
-            return crc;
+            return (ushort)(~crc);
         }
 
         public byte[] ComputeChecksumBytes(byte[] bytes)
@@ -92,59 +93,10 @@ namespace CRC_Calc
                 }
                 table[i] = temp;
             }
-           
+            table[0xFF] = 0;
         }
     }
 
-    public class Crc16
-    {
-        const ushort polynomial = 0x1021;
-        ushort[] table = new ushort[256];
-
-        public ushort ComputeChecksum(byte[] bytes)
-        {
-            ushort crc = 0xFFFF;
-            bytes[0x16268] = 0;
-            bytes[0x16269] = 0;
-            for (int i = 40; i < 0x1626B; ++i)
-            {
-                byte index = (byte)(crc ^ bytes[i]);
-                crc = (ushort)((crc >> 8) ^ table[index]);
-            }
-            return crc;
-        }
-
-        public byte[] ComputeChecksumBytes(byte[] bytes)
-        {
-            ushort crc = ComputeChecksum(bytes);
-            return BitConverter.GetBytes(crc);
-        }
-
-        public Crc16()
-        {
-            ushort value;
-            ushort temp;
-            for (ushort i = 0; i < table.Length; ++i)
-            {
-                value = 0;
-                temp = i;
-                for (byte j = 0; j < 8; ++j)
-                {
-                    if (((value ^ temp) & 0x0001) != 0)
-                    {
-                        value = (ushort)((value >> 1) ^ polynomial);
-                    }
-                    else
-                    {
-                        value >>= 1;
-                    }
-                    temp >>= 1;
-                }
-                table[i] = value;
-            }
-            table[0xff] = 0;
-        }
-    }
 }
 
 

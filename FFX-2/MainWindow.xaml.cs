@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,10 @@ namespace FFX_2
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         byte[] file;
         string path;
@@ -31,6 +34,7 @@ namespace FFX_2
         HandleEncript handleExternalProccess = new HandleEncript();
         bool isDecript = false;
         Microsoft.Win32.RegistryKey key;
+        CRC checksum;
 
         public MainWindow()
         {
@@ -111,7 +115,8 @@ namespace FFX_2
             Storyboard.SetTarget(sb, this.percentageComplete);
             sb.Begin();
             TimeSpan time = TimeSpan.FromSeconds(home.Time);
-            txtTime.Value = time;
+            try { txtTime.Value = time; }
+            catch { }
             txtGuil.Value = home.Guil;
             txtYunaRun.Value = home.RunYuna;
             txtRikkuRun.Value = home.RunRikku;
@@ -150,7 +155,7 @@ namespace FFX_2
             string filename = path + "/SAVES";
             if (!File.Exists(filename))
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Errore, selezionare una cartella con i saves di FFX-2", "Cartella non valida", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Errore, selezionare una cartella con i saves di FFX-2 HD", "Cartella non valida", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //Se arriviamo qua, i files esistono e dobbiamo decriptarli
@@ -159,9 +164,10 @@ namespace FFX_2
             isDecript = true;
             //A questo punto possiamo iniziare i lavori
             file = File.ReadAllBytes(filename);
-            home = new GeneralOffset(file,path);
-            //Apriamo il memory sum checker ora
-            handleExternalProccess.MSC();
+            checksum = new CRC(file);
+            //Link HexBox with CRC
+            txtChecksum.DataContext = checksum;
+            home = new GeneralOffset(file,path,checksum);
             refresh_ui();
         }
 

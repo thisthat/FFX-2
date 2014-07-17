@@ -368,8 +368,8 @@
 			<Grid Height="32.667" Width="461">
 				<Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left" Height="22.667" VerticalAlignment="Top" Width="103.667" Margin="6.67,0,0,0" Click="btnLoad_Click"/>
 				<Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="22.667" VerticalAlignment="Top" Width="103.667" Margin="347.333,0,0,0" Click="btnSave_Click"/>
-				
-				<xctk:WatermarkTextBox x:Name="txtChecksum" Watermark="Hex Value" TextWrapping="Wrap" Text="" Margin="184.499,0.353,185.834,9.647" HorizontalContentAlignment="Center" />
+
+                <xctk:WatermarkTextBox x:Name="txtChecksum" Watermark="Hex Value" TextWrapping="Wrap" Text="{Binding Checksum}" Margin="184.499,0.353,185.834,9.647" HorizontalContentAlignment="Center" IsEnabled="False" />
 			</Grid>
 			
 		</StatusBar>

@@ -21,6 +21,10 @@ namespace FFX_2
         {
             return b.ToString("X2");
         }
+        public static string Byte2Hex(ushort b)
+        {
+            return b.ToString("X2");
+        }
         public static string Guil2Hex(int guil)
         {
             string hex = guil.ToString("X4");
