@@ -17,8 +17,6 @@ namespace FFX_2
         int offset_run_paine = 33584;
         int offset_inventario = 31616;
         int offset_accessori = 32192;
-        int offset_patch_first = 0x1A;
-        int offset_patch_second = 0x16268;
 
         byte[] file;
         string path;
@@ -60,7 +58,7 @@ namespace FFX_2
             set
             {
                 this.file[offset_run_rikku] = value;
-                Utility.writeFile(this.file, path);
+                this.checksum.SetChecksum();
             }
         }
         public byte RunPaine
@@ -72,7 +70,7 @@ namespace FFX_2
             set
             {
                 this.file[offset_run_paine] = value;
-                Utility.writeFile(this.file, path);
+                this.checksum.SetChecksum();
             }
         }
         public int Time
@@ -93,11 +91,12 @@ namespace FFX_2
                 string _b3 = hex.Substring(2, 2);
                 string _b2 = hex.Substring(4, 2);
                 string _b1 = hex.Substring(6, 2);
+                Console.WriteLine(_b1 + _b2 + _b3 + _b4);
                 this.file[offset_time + 0] = Utility.Hex2Byte(_b1);
                 this.file[offset_time + 1] = Utility.Hex2Byte(_b2);
                 this.file[offset_time + 2] = Utility.Hex2Byte(_b3);
                 this.file[offset_time + 3] = Utility.Hex2Byte(_b4);
-                Utility.writeFile(this.file, path);
+                this.checksum.SetChecksum();
             }
         }
         public int Guil
@@ -122,7 +121,7 @@ namespace FFX_2
                 this.file[offset_guil + 1] = Utility.Hex2Byte(_b2);
                 this.file[offset_guil + 2] = Utility.Hex2Byte(_b3);
                 this.file[offset_guil + 3] = Utility.Hex2Byte(_b4);
-                Utility.writeFile(this.file, path);
+                this.checksum.SetChecksum();
             }
         }
 
@@ -132,11 +131,11 @@ namespace FFX_2
             int start = offset_accessori;
             while (file[start] != 0)
             {
-                Console.WriteLine(file[start]);
+                //Console.WriteLine(file[start]);
                 file[start] = 99;
                 start++;
             }
-            Utility.writeFile(this.file, path);
+            this.checksum.SetChecksum();
         }
         public void setInventario()
         {
@@ -144,22 +143,11 @@ namespace FFX_2
             int start = offset_inventario;
             while (file[start] != 0)
             {
-                Console.WriteLine(file[start]);
+                //Console.WriteLine(file[start]);
                 file[start] = 99;
                 start++;
             }
-            Utility.writeFile(this.file, path);
-        }
-
-        public void Patch(string bytePatch)
-        {
-            byte _b1 = Utility.Hex2Byte(bytePatch.Substring(0, 2));
-            byte _b2 = Utility.Hex2Byte(bytePatch.Substring(2));
-            file[offset_patch_first + 0] = _b1;
-            file[offset_patch_first + 1] = _b2;
-            file[offset_patch_second + 0] = _b1;
-            file[offset_patch_second + 1] = _b2;
-            Utility.writeFile(this.file, path);
+            this.checksum.SetChecksum();
         }
 
     }

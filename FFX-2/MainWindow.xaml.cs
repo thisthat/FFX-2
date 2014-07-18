@@ -22,18 +22,19 @@ namespace FFX_2
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        //To handle the file and the path where it is
         byte[] file;
         string path;
 
+        //Offset Manager
         GeneralOffset home;
+        //Decript / Encript Proccess
         HandleEncript handleExternalProccess = new HandleEncript();
         bool isDecript = false;
         Microsoft.Win32.RegistryKey key;
+        //Checksum Calculator
         CRC checksum;
 
         public MainWindow()
@@ -53,6 +54,7 @@ namespace FFX_2
             refresh_ui();
         }
 
+        //Select all the dresspheres YUNA
         private void btn_sel_yuna_Click(object sender, RoutedEventArgs e)
         {
             CheckBox tmp = null;
@@ -66,7 +68,7 @@ namespace FFX_2
                 }
             }
         }
-
+        //Select all the dresspheres RIKKU
         private void btn_sel_rikku_Click(object sender, RoutedEventArgs e)
         {
             CheckBox tmp = null;
@@ -80,7 +82,7 @@ namespace FFX_2
                 }
             }
         }
-
+        //Select all the dresspheres PAINE
         private void btn_sel_paine_Click(object sender, RoutedEventArgs e)
         {
             CheckBox tmp = null;
@@ -95,6 +97,7 @@ namespace FFX_2
             }
         }
 
+        //Update UI w/ value from file
         void refresh_ui()
         {
             if (isDecript)
@@ -115,15 +118,19 @@ namespace FFX_2
             Storyboard.SetTarget(sb, this.percentageComplete);
             sb.Begin();
             TimeSpan time = TimeSpan.FromSeconds(home.Time);
-            try { txtTime.Value = time; }
-            catch { }
+            txtHH.Value = (int)Math.Floor(time.TotalHours);
+            txtMM.Value = time.Minutes;
+            txtSS.Value = time.Seconds;
             txtGuil.Value = home.Guil;
             txtYunaRun.Value = home.RunYuna;
             txtRikkuRun.Value = home.RunRikku;
             txtPaineRun.Value = home.RunPaine;
         }
+
+        //Ripristinate UI after save the file
         private void reset_ui()
         {
+            home = null;
             btnSave.IsEnabled = false;
             btnLoad.IsEnabled = true;
             Storyboard sb = this.FindResource("SimulateProgressStoryboard") as Storyboard;
@@ -132,14 +139,20 @@ namespace FFX_2
             child.KeyFrames[1].Value = val;
             Storyboard.SetTarget(sb, this.percentageComplete);
             sb.Begin();
-            txtTime.Text = "";
+            txtHH.Text = "";
+            txtMM.Text = "";
+            txtSS.Text = "";
             txtGuil.Text = "";
             txtYunaRun.Text = "";
             txtRikkuRun.Text = "";
             txtPaineRun.Text = "";
+            txtChecksum.Text = "";
+            chkAccessori.IsEnabled = true;
+            chkInventario.IsEnabled = true;
+            chkAccessori.IsChecked = chkInventario.IsChecked = false;
         }
 
-
+        //What to do if we load a save? 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -151,8 +164,8 @@ namespace FFX_2
             }
             path = dialog.SelectedPath;
             key.SetValue("last_path", path, Microsoft.Win32.RegistryValueKind.String);
-            //Ora è decriptato
             string filename = path + "/SAVES";
+            //Little Check
             if (!File.Exists(filename))
             {
                 Xceed.Wpf.Toolkit.MessageBox.Show("Errore, selezionare una cartella con i saves di FFX-2 HD", "Cartella non valida", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -171,17 +184,11 @@ namespace FFX_2
             refresh_ui();
         }
 
+        //Save File. Encript. Restart.
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //In questo punto vediamo se fare item e accessori
-            if (chkAccessori.IsChecked.Value && home != null)
-            {
-                home.setAccessori();
-            }
-            //Patchiamo
-            home.Patch(txtChecksum.Text);
+            Utility.writeFile(file, path);
             handleExternalProccess.Encript();
-
             //Ripristiniamo tutto
             isDecript = false;
             home = null;
@@ -190,6 +197,7 @@ namespace FFX_2
             refresh_ui();
         }
 
+        //If we close the window, just make sure to encript if necessary
         private void Window_Closed(object sender, EventArgs e)
         {
             if (isDecript)
@@ -199,6 +207,7 @@ namespace FFX_2
             handleExternalProccess.Dispose();
         }
 
+        #region "Handle UI w/ File"
         private void txtGuil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (home == null) return;
@@ -206,21 +215,17 @@ namespace FFX_2
             home.Guil = guil;
         }
 
-        private void txtTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (home == null) return;
-            home.Time = (int)(txtTime.Value.Value.TotalSeconds);
-        }
-
         private void chkInventario_Checked(object sender, RoutedEventArgs e)
         {
-            if (home == null) return;
+
+            if (home == null) { chkInventario.IsChecked = false; return; }
             chkInventario.IsEnabled = false;
             home.setInventario();
         }
         private void chkAccessori_Checked(object sender, RoutedEventArgs e)
         {
-            if (home == null) return;
+
+            if (home == null) { chkAccessori.IsChecked = false; return; }
             chkAccessori.IsEnabled = false;
             home.setAccessori();
         }
@@ -243,6 +248,17 @@ namespace FFX_2
             home.RunPaine = (byte)txtPaineRun.Value;
         }
 
-        
+
+        void handleTime(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            int h = txtHH.Text != "" ? Convert.ToInt32(txtHH.Text) : 0;
+            int m = txtMM.Text != "" ? Convert.ToInt32(txtMM.Text) : 0;
+            int s = txtSS.Text != "" ? Convert.ToInt32(txtSS.Text) : 0;
+            int second = h * 3600 + m * 60 + s;
+            Console.WriteLine(second);
+            home.Time = second;
+        }
+        #endregion
     }
 }

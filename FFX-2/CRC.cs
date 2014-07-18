@@ -8,8 +8,20 @@ using System.Windows;
 
 namespace FFX_2
 {
-    class CRC 
+    class CRC : INotifyPropertyChanged
     {
+        //Binding with UI
+        public event PropertyChangedEventHandler PropertyChanged;
+        // Create the OnPropertyChanged method to raise the event 
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
 
         const ushort poly = 0x1021;
         ushort[] table = new ushort[256];
@@ -19,30 +31,51 @@ namespace FFX_2
         byte[] file;
         string chksum = "";
 
+        int offset_patch_first = 0x1A;
+        int offset_patch_second = 0x16268;
+
         public string Checksum
         {
             get
             {
-                return Utility.Byte2Hex(this.file[offset_chk]) + "" + Utility.Byte2Hex(this.file[offset_chk + 1]);
+                return chksum;
             }
-            set {  }
+            set
+            {
+                chksum = value;
+                OnPropertyChanged("Checksum");
+            }
         }
-
+        //Write Checksum to file
         public void SetChecksum()
         {
-                ushort crc = ComputeChecksum();
-                string hex = Utility.Byte2Hex(crc);
-                string _b1 = hex.Substring(0, 2);
-                string _b2 = hex.Substring(2, 2);
-                this.Checksum = Utility.Byte2Hex(this.file[offset_chk]) + "" + Utility.Byte2Hex(this.file[offset_chk + 1]);
-                //MessageBox.Show(hex);
+            ushort crc = ComputeChecksum();
+            string hex = Utility.Byte2Hex(crc);
+            string pad = "";
+            while (hex.Length - 4 > 0)
+            {
+                pad += "0";
+            }
+            hex = pad + hex;
+            string _b2 = hex.Substring(0, 2);
+            string _b1 = hex.Substring(2, 2);
+            this.Checksum = _b1 + _b2;
+            byte b1 = Utility.Hex2Byte(_b1);
+            byte b2 = Utility.Hex2Byte(_b2);
+            file[offset_patch_first + 0] = b1;
+            file[offset_patch_first + 1] = b2;
+            file[offset_patch_second + 0] = b1;
+            file[offset_patch_second + 1] = b2;
+            //MessageBox.Show(hex);
         }
         public ushort ComputeChecksum()
         {
-            //Azzeramento vecchio checksum
+            //Set 0 to previus value of chksum
             file[offset_chk + 0] = 0;
             file[offset_chk + 1] = 0;
-            //Calcolo checksum CRC16 ITU-T
+            file[offset_chk + 2] = 0;
+            file[offset_chk + 3] = 0;
+            //Execute checksum CRC16 ITU-T
             ushort crc = 0xFFFF;
             for (int i = this.start; i <= this.end; ++i)
             {
@@ -68,7 +101,7 @@ namespace FFX_2
 
         public void init_table()
         {
-            //Carichiamo la tabella
+            //Built table from polinomy
             ushort temp, a;
             for (int i = 0; i < table.Length; ++i)
             {
