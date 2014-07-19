@@ -86,6 +86,13 @@
     </ApplicationDefinition>
     <Compile Include="CRC.cs" />
     <Compile Include="HandleEncript.cs" />
+    <Compile Include="looksfere\Bandita.cs" />
+    <Compile Include="looksfere\Biancarcano.cs" />
+    <Compile Include="looksfere\Festaiola.cs" />
+    <Compile Include="looksfere\Guerriera.cs" />
+    <Compile Include="looksfere\Magipistolera.cs" />
+    <Compile Include="looksfere\Nerarcano.cs" />
+    <Compile Include="looksfere\Soubrette.cs" />
     <Compile Include="Personaggi\Paine.cs" />
     <Compile Include="Personaggi\Rikku.cs" />
     <Compile Include="Personaggi\Yuna.cs" />

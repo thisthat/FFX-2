@@ -14,17 +14,38 @@ namespace FFX_2.looksfere
             RIKKU,
             PAINE
         }
+
+        public const string PISTOLERA = "pistolera";
+        public const string BANDITA = "bandita";
+        public const string GUERRIERA = "guerriera";
+        public const string SOUBRETTE = "soubrette";
+        public const string FESTAIOLA = "festaiola";
+        public const string PSICHICA = "psichica";
+        public const string NERARCANO = "nerarcano";
+        public const string BIANCARCANO = "biancarcano";
+        public const string MAGIPISTOLERA = "magipistolera";
+        public const string CAVALIERE_NERO = "cavalierenero";
+        public const string BERSERKER = "berserker";
+        public const string ALCHIMISTA = "alchimista";
+        public const string DEA_FORTUNATA = "deafortunata";
+        public const string DOMATRICE = "domatrice";
+        public const string SAMURAI = "samurai";
+        public const string MASCOTTE = "mascotte";
+        //Special Look
+        public const string FLORALIA = "floralia";
+        public const string AUTOMASTINO = "automastino";
+        public const string SUPREMA = "suprema";
+
         public bool LastPoint = true;
 
 
         internal List<Offset> offset_yuna = new List<Offset>();
         internal List<Offset> offset_rikku = new List<Offset>();
         internal List<Offset> offset_paine = new List<Offset>();
-        internal YRP pg;
-        
 
 
-        public void write(byte[] file)
+
+        public byte[] write(byte[] file, YRP pg)
         {
             List<Offset> offset;
             switch (pg)
@@ -38,9 +59,10 @@ namespace FFX_2.looksfere
             {
                 int search = FFX_2.Utility.Hex2Dec(off.Search);
                 byte value = FFX_2.Utility.Hex2Byte(off.Value);
-                if (LastPoint) { value--; }
+                //if (LastPoint) { value--; }
                 file[search] = value;
             }
+            return file;
         }
     }
 }

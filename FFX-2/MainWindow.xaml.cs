@@ -1,6 +1,8 @@
-﻿using System;
+﻿using FFX_2.looksfere;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,9 +39,20 @@ namespace FFX_2
         //Checksum Calculator
         CRC checksum;
 
+        //Dressphera
+        Pistolera pistolera = new Pistolera();
+        Magipistolera maginistolera = new Magipistolera();
+        Guerriera guerriera = new Guerriera();
+        Soubrette soubrette = new Soubrette();
+        Nerarcano nerarcano = new Nerarcano();
+        Biancarcano biancarcano = new Biancarcano();
+        Bandita bandita = new Bandita();
+        Festaiola festaiola = new Festaiola();
+
         public MainWindow()
         {
             InitializeComponent();
+            CultureInfo ci = CultureInfo.InstalledUICulture;
             //Registro di sys per la path di default
             key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("TTFFX-2", true);
             if (key == null)
@@ -150,6 +163,41 @@ namespace FFX_2
             chkAccessori.IsEnabled = true;
             chkInventario.IsEnabled = true;
             chkAccessori.IsChecked = chkInventario.IsChecked = false;
+            //TAB YUNA
+            CheckBox tmp;
+            UIElementCollection controls;
+            controls = grid_looksfere_yuna.Children;
+            foreach (Control c in controls)
+            {
+                if (c is CheckBox)
+                {
+                    tmp = (CheckBox)c;
+                    tmp.IsChecked = false;
+                    tmp.IsEnabled = true;
+                }
+            }
+            //TAB RIKKU
+            controls = grid_looksfere_rikku.Children;
+            foreach (Control c in controls)
+            {
+                if (c is CheckBox)
+                {
+                    tmp = (CheckBox)c;
+                    tmp.IsChecked = false;
+                    tmp.IsEnabled = true;
+                }
+            }
+            //TAB PAINE
+            controls = grid_looksfere_paine.Children;
+            foreach (Control c in controls)
+            {
+                if (c is CheckBox)
+                {
+                    tmp = (CheckBox)c;
+                    tmp.IsChecked = false;
+                    tmp.IsEnabled = true;
+                }
+            }
         }
 
         //What to do if we load a save? 
@@ -180,7 +228,7 @@ namespace FFX_2
             checksum = new CRC(file);
             //Link HexBox with CRC
             txtChecksum.DataContext = checksum;
-            home = new GeneralOffset(file,path,checksum);
+            home = new GeneralOffset(file, path, checksum);
             refresh_ui();
         }
 
@@ -259,6 +307,56 @@ namespace FFX_2
             Console.WriteLine(second);
             home.Time = second;
         }
+
+        private void lookSferaYuna_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            handleLooksfera(sender, Looksfera.YRP.YUNA);
+        }
+        private void lookSferaRikku_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            handleLooksfera(sender, Looksfera.YRP.RIKKU);
+        }
+        private void lookSferaPaine_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            handleLooksfera(sender, Looksfera.YRP.PAINE);
+        }
+
+        private void handleLooksfera(object sender, Looksfera.YRP pg)
+        {
+            // TODO: aggiungere l'implementazione del gestore dell'evento in questa posizione.
+            CheckBox look = (CheckBox)sender;
+            //if (home == null) { look.IsChecked = false; return; }
+            string id = look.Name.Split('_')[0];
+            switch (id)
+            {
+                case Looksfera.ALCHIMISTA: break;
+                case Looksfera.BANDITA: bandita.write(file, pg); break;
+                case Looksfera.BERSERKER: break;
+                case Looksfera.BIANCARCANO: biancarcano.write(file, pg); break;
+                case Looksfera.CAVALIERE_NERO: break;
+                case Looksfera.DEA_FORTUNATA: break;
+                case Looksfera.DOMATRICE: break;
+                case Looksfera.FESTAIOLA: festaiola.write(file, pg); break;
+                case Looksfera.FLORALIA: break;
+                case Looksfera.GUERRIERA: guerriera.write(file, pg); break;
+                case Looksfera.MAGIPISTOLERA: maginistolera.write(file, pg); break;
+                case Looksfera.MASCOTTE: break;
+                case Looksfera.NERARCANO: nerarcano.write(file, pg); break;
+                case Looksfera.PISTOLERA: pistolera.write(file, pg); break;
+                case Looksfera.PSICHICA: break;
+                case Looksfera.SAMURAI: break;
+                case Looksfera.SOUBRETTE: soubrette.write(file, pg); break;
+                default: break;
+            }
+            checksum.SetChecksum();
+            look.IsEnabled = false;
+        }
+
+        #region "LookSfere"
+
+
+        #endregion
+
         #endregion
     }
 }

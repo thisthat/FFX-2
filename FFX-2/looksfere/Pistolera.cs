@@ -66,9 +66,8 @@ namespace FFX_2.looksfere
             offset_paine.Add(new Offset("9F82", "96"));
         }
 
-        public Pistolera(YRP p)
+        public Pistolera()
         {
-            this.pg = p;
             InitYuna();
             InitRikku();
             InitPaine();
