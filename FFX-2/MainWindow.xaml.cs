@@ -1,10 +1,12 @@
-﻿using FFX_2.looksfere;
+﻿using FFX_2.Lang;
+using FFX_2.looksfere;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,8 +40,9 @@ namespace FFX_2
         Microsoft.Win32.RegistryKey key;
         //Checksum Calculator
         CRC checksum;
-
-        //Dressphera
+        //Updater
+        Updater up;
+        //Dresspheres
         Pistolera pistolera = new Pistolera();
         Magipistolera maginistolera = new Magipistolera();
         Guerriera guerriera = new Guerriera();
@@ -52,7 +55,13 @@ namespace FFX_2
         public MainWindow()
         {
             InitializeComponent();
-            CultureInfo ci = CultureInfo.InstalledUICulture;
+            
+            System.Threading.Thread.Sleep(1000);
+            //Lang Loader
+            up = new Updater();
+            loaderLanguage();
+
+
             //Registro di sys per la path di default
             key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("TTFFX-2", true);
             if (key == null)
@@ -61,7 +70,96 @@ namespace FFX_2
             }
         }
 
+        #region "LANG LOADER"
+        private void loaderLanguage()
+        {
+            CultureInfo ci = CultureInfo.InstalledUICulture;
+            //Già fatto per l'italiano
+            if (ci.Name == "it-IT") return;
+            LangLoader lang = new LangLoader(ci.Name);
+            //All UIObjects
+            //this.Title = lang.get(LangLoader.WndTitle);
+            this.btnLoad.Content = lang.get(LangLoader.LoadBtn);
+            this.btnSave.Content = lang.get(LangLoader.SaveBtn);
+            //Home TAB
+            this.lblPercent.Content = lang.get(LangLoader.Percentual);
+            this.lblGuil.Content = lang.get(LangLoader.Guil);
+            this.txtGuil.Watermark = lang.get(LangLoader.Guil);
+            this.lblTime.Content = lang.get(LangLoader.Time);
+            this.lblRunYuna.Content = lang.get(LangLoader.RunYuna);
+            this.lblRunRikku.Content = lang.get(LangLoader.RunRikku);
+            this.lblRunPaine.Content = lang.get(LangLoader.RunPaine);
+            this.txtYunaRun.Watermark = lang.get(LangLoader.RunYuna);
+            this.txtRikkuRun.Watermark = lang.get(LangLoader.RunRikku);
+            this.txtPaineRun.Watermark = lang.get(LangLoader.RunPaine);
+            this.chkAccessori.Content = lang.get(LangLoader.Accessories);
+            this.chkInventario.Content = lang.get(LangLoader.Item);
+            //YUNA TAB
+            this.frmYunaStat.Header = lang.get(LangLoader.Stat);
+            this.btn_sel_yuna.Content = lang.get(LangLoader.SelectAll);
+            this.pistolera_yuna.Content = lang.get(LangLoader.Gunner);
+            this.bandita_yuna.Content = lang.get(LangLoader.Thief);
+            this.guerriera_yuna.Content = lang.get(LangLoader.Warrior);
+            this.soubrette_yuna.Content = lang.get(LangLoader.Songstress);
+            this.festaiola_yuna.Content = lang.get(LangLoader.Festivalist);
+            this.psichica_yuna.Content = lang.get(LangLoader.Psychic);
+            this.nerarcano_yuna.Content = lang.get(LangLoader.BlackMage);
+            this.biancarcano_yuna.Content = lang.get(LangLoader.WhiteMage);
+            this.magipistolera_yuna.Content = lang.get(LangLoader.GunMage);
+            this.cavalierenero_yuna.Content = lang.get(LangLoader.DarkKnight);
+            this.berserker_yuna.Content = lang.get(LangLoader.Berserker);
+            this.alchimista_yuna.Content = lang.get(LangLoader.Alchemist);
+            this.deafortunata_yuna.Content = lang.get(LangLoader.LadyLuck);
+            this.domatrice_yuna.Content = lang.get(LangLoader.Trainer);
+            this.samurai_yuna.Content = lang.get(LangLoader.Samurai);
+            this.mascotte_yuna.Content = lang.get(LangLoader.Mascot);
+            this.floralia_yuna.Content = lang.get(LangLoader.FloralFallal);
 
+            //RIKKU TAB
+            this.frmRikkuStat.Header = lang.get(LangLoader.Stat);
+            this.btn_sel_rikku.Content = lang.get(LangLoader.SelectAll);
+            this.pistolera_rikku.Content = lang.get(LangLoader.Gunner);
+            this.bandita_rikku.Content = lang.get(LangLoader.Thief);
+            this.guerriera_rikku.Content = lang.get(LangLoader.Warrior);
+            this.soubrette_rikku.Content = lang.get(LangLoader.Songstress);
+            this.festaiola_rikku.Content = lang.get(LangLoader.Festivalist);
+            this.psichica_rikku.Content = lang.get(LangLoader.Psychic);
+            this.nerarcano_rikku.Content = lang.get(LangLoader.BlackMage);
+            this.biancarcano_rikku.Content = lang.get(LangLoader.WhiteMage);
+            this.magipistolera_rikku.Content = lang.get(LangLoader.GunMage);
+            this.cavalierenero_rikku.Content = lang.get(LangLoader.DarkKnight);
+            this.berserker_rikku.Content = lang.get(LangLoader.Berserker);
+            this.alchimista_rikku.Content = lang.get(LangLoader.Alchemist);
+            this.deafortunata_rikku.Content = lang.get(LangLoader.LadyLuck);
+            this.domatrice_rikku.Content = lang.get(LangLoader.Trainer);
+            this.samurai_rikku.Content = lang.get(LangLoader.Samurai);
+            this.mascotte_rikku.Content = lang.get(LangLoader.Mascot);
+            this.automatino_rikku.Content = lang.get(LangLoader.MachinaMaw);
+
+            //PAINE TAB
+            this.frmPaineStat.Header = lang.get(LangLoader.Stat);
+            this.btn_sel_paine.Content = lang.get(LangLoader.SelectAll);
+            this.pistolera_paine.Content = lang.get(LangLoader.Gunner);
+            this.bandita_paine.Content = lang.get(LangLoader.Thief);
+            this.guerriera_paine.Content = lang.get(LangLoader.Warrior);
+            this.soubrette_paine.Content = lang.get(LangLoader.Songstress);
+            this.festaiola_paine.Content = lang.get(LangLoader.Festivalist);
+            this.psichica_paine.Content = lang.get(LangLoader.Psychic);
+            this.nerarcano_paine.Content = lang.get(LangLoader.BlackMage);
+            this.biancarcano_paine.Content = lang.get(LangLoader.WhiteMage);
+            this.magipistolera_paine.Content = lang.get(LangLoader.GunMage);
+            this.cavalierenero_paine.Content = lang.get(LangLoader.DarkKnight);
+            this.berserker_paine.Content = lang.get(LangLoader.Berserker);
+            this.alchimista_paine.Content = lang.get(LangLoader.Alchemist);
+            this.deafortunata_paine.Content = lang.get(LangLoader.LadyLuck);
+            this.domatrice_paine.Content = lang.get(LangLoader.Trainer);
+            this.samurai_paine.Content = lang.get(LangLoader.Samurai);
+            this.mascotte_paine.Content = lang.get(LangLoader.Mascot);
+            this.suprema_paine.Content = lang.get(LangLoader.FullThrottle);
+
+        }
+        #endregion
+        #region "UI Base"
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             refresh_ui();
@@ -252,9 +350,10 @@ namespace FFX_2
             {
                 handleExternalProccess.Encript();
             }
-            handleExternalProccess.Dispose();
+            handleExternalProccess.Dispose(); 
         }
-
+        
+        #endregion
         #region "Handle UI w/ File"
         private void txtGuil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {

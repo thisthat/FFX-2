@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FFX_2
 {
-    class HandleEncript
+    class HandleEncript : IDisposable
     {
         string path = "";
         Process sum;
