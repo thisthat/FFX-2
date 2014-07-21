@@ -62,5 +62,17 @@ namespace FFX_2
         public static void writeFile(byte[] file,string path){
             File.WriteAllBytes(path + "/SAVES", file);
         }
+
+        public static string Int2HexPad8(int b)
+        {
+            string hex = b.ToString("X4");
+            int d = 8 - hex.Length;
+            string pad = "";
+            for (int i = 0; i < d; i++)
+            {
+                pad += "0";
+            }
+            return pad + hex;
+        }
     }
 }

@@ -12,9 +12,7 @@ namespace FFX_2
         int offset_percentage = 12;
         int offset_time = 16;
         int offset_guil = 30744;
-        int offset_run_yuna = 33328;
-        int offset_run_rikku = 33456;
-        int offset_run_paine = 33584;
+       
         int offset_inventario = 31616;
         int offset_accessori = 32192;
         int offset_point_argento = 0xDE8; //Due Byte
@@ -26,10 +24,18 @@ namespace FFX_2
         int offset_floralia = 0x7861;
         int offset_automastino = 0x7868;
         int offset_suprema = 0x7869;
+
+        //All Item
+        int offset_start_item = 0x7980;
+        int offset_end_item = 0x7A07;
+
+
         byte[] file;
         string path;
 
         CRC checksum;
+
+        public const int N_ITEMS = 0x44;
 
         public GeneralOffset(byte[] f,string p, CRC checksum)
         {
@@ -92,42 +98,7 @@ namespace FFX_2
                 return this.file[offset_percentage];
             }
         }
-        public byte RunYuna
-        {
-            get
-            {
-                return this.file[offset_run_yuna];
-            }
-            set
-            {
-                this.file[offset_run_yuna] = value;
-                this.checksum.SetChecksum();
-            }
-        }
-        public byte RunRikku
-        {
-            get
-            {
-                return this.file[offset_run_rikku];
-            }
-            set
-            {
-                this.file[offset_run_rikku] = value;
-                this.checksum.SetChecksum();
-            }
-        }
-        public byte RunPaine
-        {
-            get
-            {
-                return this.file[offset_run_paine];
-            }
-            set
-            {
-                this.file[offset_run_paine] = value;
-                this.checksum.SetChecksum();
-            }
-        }
+        
         public int Time
         {
             get
@@ -205,6 +176,16 @@ namespace FFX_2
             this.checksum.SetChecksum();
         }
 
+        public void setInventario(int elm)
+        {
+            //Modifichiamo gli oggetti
+            for (int i = offset_inventario; i < offset_inventario + elm; i++)
+            {
+                file[i] = 99;
+            }
+            this.checksum.SetChecksum();
+        }
+
         public void setAllLooksfere()
         {
             for (int i = offset_init_looksfere; i < offset_end_looksfere; i++)
@@ -216,6 +197,21 @@ namespace FFX_2
             file[offset_automastino] = 1;
             file[offset_suprema] = 1;
             this.checksum.SetChecksum();
+        }
+
+        public void setAllItem(bool isSel99Item)
+        {
+            byte j = 0;
+            for (int i = offset_start_item; i < offset_end_item; i += 2)
+            {
+                file[i] = j++;
+                file[i + 1] = 0x20;
+            }
+            if (isSel99Item)
+            {
+                //68 elements
+                setInventario(N_ITEMS);
+            }
         }
 
     }

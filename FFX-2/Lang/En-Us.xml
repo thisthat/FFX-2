@@ -35,6 +35,10 @@
     <value>99 Accessories</value>
   </string>
   <string>
+    <name>AllItem</name>
+    <value>All Item Inventory</value>
+  </string>
+  <string>
     <name>RunYuna</name>
     <value>Run Yuna:</value>
   </string>
@@ -61,7 +65,7 @@
   </string>
   <string>
     <name>Stat</name>
-    <value>Stat :: Not Found Yet</value>
+    <value>Stats</value>
   </string>
   <!-- Dresspheres TAB -->
   <string>

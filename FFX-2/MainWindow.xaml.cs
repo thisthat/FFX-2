@@ -1,6 +1,7 @@
 ﻿using FFX_2.Lang;
 using FFX_2.looksfere;
 using FFX_2.Looksfere;
+using FFX_2.Personaggi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +44,10 @@ namespace FFX_2
         CRC checksum;
         //Updater
         Updater up;
+        //YRP
+        Yuna yuna;
+        Rikku rikku;
+        Paine paine;
         //Dresspheres
         Pistolera pistolera = new Pistolera();
         Magipistolera maginistolera = new Magipistolera();
@@ -88,8 +93,14 @@ namespace FFX_2
         {
             CultureInfo ci = CultureInfo.InstalledUICulture;
             //Già fatto per l'italiano
-            if (ci.Name == "it-IT") return;
-            LangLoader lang = new LangLoader(ci.Name);
+            string langName;
+            switch (ci.Name)
+            {
+                case "it-IT": return;
+                case "en-US": langName = "en-US"; break;
+                default: langName = "en-US"; break;
+            }
+            LangLoader lang = new LangLoader(langName);
             //All UIObjects
             //this.Title = lang.get(LangLoader.WndTitle);
             this.btnLoad.Content = lang.get(LangLoader.LoadBtn);
@@ -109,6 +120,7 @@ namespace FFX_2
             this.chkAccessori.Content = lang.get(LangLoader.Accessories);
             this.chkInventario.Content = lang.get(LangLoader.Item);
             this.chkLooksfera.Content = lang.get(LangLoader.AllDress);
+            this.chkAllItem.Content = lang.get(LangLoader.AllItem);
             //YUNA TAB
             this.frmYunaStat.Header = lang.get(LangLoader.Stat);
             this.btn_sel_yuna.Content = lang.get(LangLoader.SelectAll);
@@ -261,18 +273,28 @@ namespace FFX_2
             txtMM.Value = time.Minutes;
             txtSS.Value = time.Seconds;
             txtGuil.Value = home.Guil;
-            txtYunaRun.Value = home.RunYuna;
-            txtRikkuRun.Value = home.RunRikku;
-            txtPaineRun.Value = home.RunPaine;
+            txtYunaRun.Value = yuna.RunYuna;
+            txtRikkuRun.Value = rikku.RunRikku;
+            txtPaineRun.Value = paine.RunPaine;
             txtPointArgento.Value = home.PointArgento;
             txtPointAzzurro.Value = home.PointAzzurro;
             txtPointSposa.Value = home.PointSposa;
+            //STATS
+            txtHPYuna.Value = yuna.HPYuna;
+            txtMPYuna.Value = yuna.MPYuna;
+            txtHPRikku.Value = rikku.HPRikku;
+            txtMPRikku.Value = rikku.MPRikku;
+            txtHPPaine.Value = paine.HPPaine;
+            txtMPPaine.Value = paine.MPPaine;
         }
 
         //Ripristinate UI after save the file
         private void reset_ui()
         {
             home = null;
+            yuna = null;
+            rikku = null;
+            paine = null;
             btnSave.IsEnabled = false;
             btnLoad.IsEnabled = true;
             Storyboard sb = this.FindResource("SimulateProgressStoryboard") as Storyboard;
@@ -292,7 +314,8 @@ namespace FFX_2
             chkAccessori.IsEnabled = true;
             chkInventario.IsEnabled = true;
             chkLooksfera.IsEnabled = true;
-            chkAccessori.IsChecked = chkInventario.IsChecked = chkLooksfera.IsChecked = false;
+            chkAllItem.IsEnabled = true;
+            chkAccessori.IsChecked = chkInventario.IsChecked = chkLooksfera.IsChecked = chkAllItem.IsChecked = false;
             //TAB YUNA
             CheckBox tmp;
             UIElementCollection controls;
@@ -332,6 +355,13 @@ namespace FFX_2
             txtPointArgento.Text = "";
             txtPointAzzurro.Text = "";
             txtPointSposa.Text = "";
+            //STATS
+            txtHPYuna.Text = "";
+            txtMPYuna.Text = "";
+            txtHPRikku.Text = "";
+            txtMPRikku.Text = "";
+            txtHPPaine.Text = "";
+            txtMPPaine.Text = "";
         }
 
         //What to do if we load a save? 
@@ -363,6 +393,9 @@ namespace FFX_2
             //Link HexBox with CRC
             txtChecksum.DataContext = checksum;
             home = new GeneralOffset(file, path, checksum);
+            yuna = new Yuna(file, checksum);
+            rikku = new Rikku(file, checksum);
+            paine = new Paine(file, checksum);
             refresh_ui();
         }
 
@@ -391,6 +424,7 @@ namespace FFX_2
 
         #endregion
         #region "Handle UI w/ File"
+        #region "HOME AND LOOK"
         private void txtGuil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (home == null) return;
@@ -403,7 +437,18 @@ namespace FFX_2
 
             if (home == null) { chkInventario.IsChecked = false; return; }
             chkInventario.IsEnabled = false;
-            home.setInventario();
+            if (chkAllItem.IsChecked.Value)
+            {
+                home.setInventario(GeneralOffset.N_ITEMS);
+            }
+            else { home.setInventario(); }
+            
+        }
+        private void chkAllItem_Checked(object sender, RoutedEventArgs e)
+        {
+            if (home == null) { chkAllItem.IsChecked = false; return; }
+            chkAllItem.IsEnabled = false;
+            home.setAllItem(chkInventario.IsChecked.Value);
         }
         private void chkAccessori_Checked(object sender, RoutedEventArgs e)
         {
@@ -421,23 +466,7 @@ namespace FFX_2
         }
 
 
-        private void txtYunaRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (home == null) return;
-            home.RunYuna = (byte)txtYunaRun.Value;
-        }
-
-        private void txtRikkuRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (home == null) return;
-            home.RunRikku = (byte)txtRikkuRun.Value;
-        }
-
-        private void txtPaineRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (home == null) return;
-            home.RunPaine = (byte)txtPaineRun.Value;
-        }
+        
 
         private void txtPointAzzurro_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -465,7 +494,37 @@ namespace FFX_2
             Console.WriteLine(second);
             home.Time = second;
         }
+        #endregion
 
+        #region "STATS"
+        private void txtHPYuna_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (yuna == null) return;
+            yuna.HPYuna = (int)txtHPYuna.Value;
+        }
+        private void txtMPYuna_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (yuna == null) return;
+            yuna.MPYuna = (int)txtMPYuna.Value;
+        }
+        private void txtYunaRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (yuna == null) return;
+            yuna.RunYuna = (byte)txtYunaRun.Value;
+        }
+
+        private void txtRikkuRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (rikku == null) return;
+            rikku.RunRikku = (byte)txtRikkuRun.Value;
+        }
+
+        private void txtPaineRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (paine == null) return;
+            paine.RunPaine = (byte)txtPaineRun.Value;
+        }
+        #endregion
 
         #region "LookSfere"
         private void lookSferaYuna_Checked(object sender, System.Windows.RoutedEventArgs e)
@@ -520,6 +579,11 @@ namespace FFX_2
 
         #endregion
 
+        
+
+        
+
         #endregion
+        
     }
 }

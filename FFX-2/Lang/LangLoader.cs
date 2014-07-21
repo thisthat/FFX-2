@@ -20,6 +20,8 @@ namespace FFX_2.Lang
         public const string Time = "Time";
         public const string Item = "Item";
         public const string Accessories = "Accessories";
+        public const string AllItem = "AllItem";
+        //Other TAB
         public const string RunYuna = "RunYuna";
         public const string RunRikku = "RunRikku";
         public const string RunPaine = "RunPaine";

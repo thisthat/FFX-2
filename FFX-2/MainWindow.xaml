@@ -379,23 +379,18 @@
 						Minimum="0"
 						Maximum="1" Margin="0,0,35.334,53.267" Width="130" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
 					<Label x:Name="lblPercent" Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,1.712,-12.667,0" VerticalAlignment="Top" Width="162.667"/>
-					<xctk:DecimalUpDown x:Name="txtYunaRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,115.664,0,0" Width="130.667" Watermark="Fughe Yuna" ValueChanged="txtYunaRun_ValueChanged" />
-					<xctk:DecimalUpDown x:Name="txtRikkuRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,143.664,0,0" Width="130.667" Watermark="Fughe Rikku" ValueChanged="txtRikkuRun_ValueChanged" />
-					<xctk:DecimalUpDown x:Name="txtPaineRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,171.664,0,0" Width="130.667" Watermark="Fughe Paine" ValueChanged="txtPaineRun_ValueChanged" />
-					<Label x:Name="lblRunYuna" Content="Fuga Yuna:" HorizontalAlignment="Left" Height="26" Margin="5.331,113.664,0,0" VerticalAlignment="Top" Width="99"/>
-					<Label x:Name="lblRunRikku" Content="Fuga Rikku:" HorizontalAlignment="Left" Height="26" Margin="5.331,141.664,0,0" VerticalAlignment="Top" Width="99"/>
-					<Label x:Name="lblRunPaine" Content="Fuga Paine:" HorizontalAlignment="Left" Height="26" Margin="5.331,170.184,0,0" VerticalAlignment="Top" Width="99"/>
 					<xctk:DecimalUpDown HorizontalAlignment="Left" Height="20.004" Margin="74,48.996,0,0" VerticalAlignment="Top" Width="46.667"/>
 					<xctk:DecimalUpDown x:Name="txtHH" Increment="1" Maximum="255" Minimum="0" Watermark="hh" HorizontalAlignment="Left" Height="20.004" Margin="74,48.996,0,0" VerticalAlignment="Top" Width="51.667" ValueChanged="handleTime"/>
 					<xctk:DecimalUpDown x:Name="txtSS" Increment="1" Maximum="59" Minimum="0" Watermark="ss" HorizontalAlignment="Left" Height="20.004" Margin="170,48.996,0,0" VerticalAlignment="Top" Width="34.667"  HorizontalContentAlignment="Left" Style="{DynamicResource DecimalUpDownStyle1}" ValueChanged="handleTime"/>
 					<xctk:DecimalUpDown x:Name="txtMM" Increment="1" Maximum="59" Minimum="0" Watermark="mm" HorizontalAlignment="Left" Height="20.004" Margin="125.667,48.976,0,0" VerticalAlignment="Top" Width="44.333" HorizontalContentAlignment="Left" Style="{DynamicResource DecimalUpDownStyle1}" RenderTransformOrigin="0.663,0.534" ValueChanged="handleTime"/>
 					<Label Content="this_that :: this_that@hotmail.it" HorizontalAlignment="Left" Height="20" Margin="321.008,189.668,-37.341,0" VerticalAlignment="Top" Width="171.333" FontSize="9.333" Style="{DynamicResource LabelStyle1}"/>
-					<CheckBox x:Name="chkLooksfera" Content="Tutte le looksfere" HorizontalAlignment="Left" Height="18.004" Margin="289.666,170.184,0,0" VerticalAlignment="Top" Width="147.001" Checked="chkLooksfera_Checked"/>
+					<CheckBox x:Name="chkLooksfera" Content="Tutte le looksfere" HorizontalAlignment="Left" Height="18.004" Margin="74,110.664,0,0" VerticalAlignment="Top" Width="147.001" Checked="chkLooksfera_Checked"/>
+					<CheckBox x:Name="chkAllItem" Content="Inventario Completo" HorizontalAlignment="Left" Height="18.004" Margin="74,128.668,0,0" VerticalAlignment="Top" Width="147.001" Checked="chkAllItem_Checked"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Yuna">
 				<Grid Margin="0,0,1,1">
-					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/yuna.png" Stretch="UniformToFill" Margin="124.667,0,0,0" Opacity="0.98"/>
+					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/yuna.png" Stretch="UniformToFill" Margin="124.667,0,0,0" Opacity="0.6"/>
 					<GroupBox x:Name="looksfere_yuna" Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
 						<Grid x:Name="grid_looksfere_yuna" Margin="-6,-2.96,-6,-6">
                             <CheckBox x:Name="pistolera_yuna" Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105" Checked="lookSferaYuna_Checked"/>
@@ -418,13 +413,22 @@
 							<Button x:Name="btn_sel_yuna" Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111" Click="btn_sel_yuna_Click"/>
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="frmYunaStat" Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+					<GroupBox x:Name="frmYunaStat" Header="Statistiche" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188">
+						<Grid HorizontalAlignment="Left" Height="183.661" Margin="-1,-2.621,-6,-6" VerticalAlignment="Top" Width="183">
+							<xctk:DecimalUpDown x:Name="txtYunaRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,148.661,0,0" Width="104.331" Watermark="Fughe Yuna" ValueChanged="txtYunaRun_ValueChanged" />
+							<Label x:Name="lblRunYuna" Content="Fuga Yuna:" HorizontalAlignment="Left" Height="26" Margin="0,146.661,0,0" VerticalAlignment="Top" Width="99"/>
+							<xctk:DecimalUpDown x:Name="txtMPYuna" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Yuna" ValueChanged="txtMPYuna_ValueChanged" />
+							<Label x:Name="lblMPYuna" Content="MP:" HorizontalAlignment="Left" Height="26" Margin="0,34.664,0,0" VerticalAlignment="Top" Width="99"/>
+							<xctk:DecimalUpDown x:Name="txtHPYuna" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Yuna" ValueChanged="txtHPYuna_ValueChanged" />
+							<Label x:Name="lblHPYuna" Content="HP:" HorizontalAlignment="Left" Height="26" Margin="0,10,0,0" VerticalAlignment="Top" Width="86.832"/>
+						</Grid>
+					</GroupBox>
 					
 				</Grid>
 			</TabItem>
 			<TabItem Header="Rikku">
 				<Grid Margin="0,0,1,1">
-					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/rikku.png" Stretch="UniformToFill" Margin="124.667,0,0,0"/>
+					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="329.333" Source="Img/rikku.png" Stretch="UniformToFill" Margin="124.667,0,0,0" Opacity="0.6"/>
 					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
 						<Grid x:Name="grid_looksfere_rikku" Margin="-6,-2.96,-6,-6">
                             <CheckBox x:Name="pistolera_rikku" Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105" Checked="lookSferaRikku_Checked"/>
@@ -447,12 +451,21 @@
 							<Button x:Name="btn_sel_rikku" Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111" Click="btn_sel_rikku_Click"/>
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="frmRikkuStat" Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+					<GroupBox x:Name="frmRikkuStat" Header="Statistiche" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188">
+						<Grid HorizontalAlignment="Left" Height="183.661" Margin="-1,-2.621,-6,-6" VerticalAlignment="Top" Width="183">
+							<xctk:DecimalUpDown x:Name="txtMPRikku" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Rikku" ValueChanged="txtYunaRun_ValueChanged" />
+							<Label x:Name="lblMPYuna1" Content="MP:" HorizontalAlignment="Left" Height="26" Margin="0,34.664,0,0" VerticalAlignment="Top" Width="99"/>
+							<xctk:DecimalUpDown x:Name="txtHPRikku" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Rikku" ValueChanged="txtYunaRun_ValueChanged" />
+							<Label x:Name="lblHPYuna1" Content="HP:" HorizontalAlignment="Left" Height="26" Margin="0,10,0,0" VerticalAlignment="Top" Width="86.832"/>
+							<xctk:DecimalUpDown x:Name="txtRikkuRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,148.661,0,0" Width="104.331" Watermark="Fughe Rikku" ValueChanged="txtRikkuRun_ValueChanged" />
+							<Label x:Name="lblRunRikku" Content="Fuga Rikku:" HorizontalAlignment="Left" Height="26" Margin="0,146.661,0,0" VerticalAlignment="Top" Width="99"/>
+						</Grid>
+					</GroupBox>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Paine">
 				<Grid Margin="0,0,1,1">
-					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="327.333" Source="Img/paine.png" Stretch="UniformToFill" Margin="151.346,0,-24.679,0"/>
+					<Image HorizontalAlignment="Left" Height="203.333" VerticalAlignment="Top" Width="327.333" Source="Img/paine.png" Stretch="UniformToFill" Margin="151.346,0,-24.679,0" Opacity="0.6"/>
 					<GroupBox Header="Looksfere" Height="198" Margin="8.666,-1.339,204.334,0" VerticalAlignment="Top">
 						<Grid x:Name="grid_looksfere_paine" Margin="-6,-2.96,-6,-6">
                             <CheckBox x:Name="pistolera_paine" Content="Pistolera" HorizontalAlignment="Left" Height="19" Margin="10,5,0,0" VerticalAlignment="Top" Width="105" Checked="lookSferaPaine_Checked"/>
@@ -475,7 +488,16 @@
 							<Button x:Name="btn_sel_paine" Content="Seleziona Tutto" HorizontalAlignment="Left" Height="21" Margin="120,158,0,0" VerticalAlignment="Top" Width="111" Click="btn_sel_paine_Click"/>
 						</Grid>
 					</GroupBox>
-					<GroupBox x:Name="frmPaineStat" Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+					<GroupBox x:Name="frmPaineStat" Header="Statistiche" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188">
+						<Grid HorizontalAlignment="Left" Height="183.661" Margin="-1,-2.621,-6,-6" VerticalAlignment="Top" Width="183">
+							<xctk:DecimalUpDown x:Name="txtMPPaine" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Paine" ValueChanged="txtYunaRun_ValueChanged" />
+							<Label x:Name="lblMPYuna2" Content="MP:" HorizontalAlignment="Left" Height="26" Margin="0,34.664,0,0" VerticalAlignment="Top" Width="99"/>
+							<xctk:DecimalUpDown x:Name="txtHPPaine" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Paine" ValueChanged="txtYunaRun_ValueChanged" />
+							<Label x:Name="lblHPYuna2" Content="HP:" HorizontalAlignment="Left" Height="26" Margin="0,10,0,0" VerticalAlignment="Top" Width="86.832"/>
+							<xctk:DecimalUpDown x:Name="txtPaineRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,148.661,0,0" Width="104.331" Watermark="Fughe Paine" ValueChanged="txtPaineRun_ValueChanged" />
+							<Label x:Name="lblRunPaine" Content="Fuga Paine:" HorizontalAlignment="Left" Height="26" Margin="0,146.661,0,0" VerticalAlignment="Top" Width="86.584"/>
+						</Grid>
+					</GroupBox>
 				</Grid>
 			</TabItem>
 			<TabItem x:Name="headFrameCampain" Header="Campagne">
