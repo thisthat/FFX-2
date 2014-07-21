@@ -1,5 +1,6 @@
 ﻿using FFX_2.Lang;
 using FFX_2.looksfere;
+using FFX_2.Personaggi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,6 +43,10 @@ namespace FFX_2
         CRC checksum;
         //Updater
         Updater up;
+        //YRP
+        Yuna yuna;
+        Rikku rikku;
+        Paine paine;
         //Dresspheres
         Pistolera pistolera = new Pistolera();
         Magipistolera maginistolera = new Magipistolera();
@@ -233,15 +238,18 @@ namespace FFX_2
             txtMM.Value = time.Minutes;
             txtSS.Value = time.Seconds;
             txtGuil.Value = home.Guil;
-            txtYunaRun.Value = home.RunYuna;
-            txtRikkuRun.Value = home.RunRikku;
-            txtPaineRun.Value = home.RunPaine;
+            txtYunaRun.Value = yuna.RunYuna;
+            txtRikkuRun.Value = rikku.RunRikku;
+            txtPaineRun.Value = paine.RunPaine;
         }
 
         //Ripristinate UI after save the file
         private void reset_ui()
         {
             home = null;
+            yuna = null;
+            rikku = null;
+            paine = null;
             btnSave.IsEnabled = false;
             btnLoad.IsEnabled = true;
             Storyboard sb = this.FindResource("SimulateProgressStoryboard") as Storyboard;
@@ -327,6 +335,9 @@ namespace FFX_2
             //Link HexBox with CRC
             txtChecksum.DataContext = checksum;
             home = new GeneralOffset(file, path, checksum);
+            yuna = new Yuna(file, checksum);
+            rikku = new Rikku(file, checksum);
+            paine = new Paine(file, checksum);
             refresh_ui();
         }
 
@@ -338,6 +349,9 @@ namespace FFX_2
             //Ripristiniamo tutto
             isDecript = false;
             home = null;
+            yuna = null;
+            rikku = null;
+            paine = null;
             handleExternalProccess.Dispose();
             reset_ui();
             refresh_ui();
@@ -379,20 +393,20 @@ namespace FFX_2
 
         private void txtYunaRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (home == null) return;
-            home.RunYuna = (byte)txtYunaRun.Value;
+            if (yuna == null) return;
+            yuna.RunYuna = (byte)txtYunaRun.Value;
         }
 
         private void txtRikkuRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (home == null) return;
-            home.RunRikku = (byte)txtRikkuRun.Value;
+            if (rikku == null) return;
+            rikku.RunRikku = (byte)txtRikkuRun.Value;
         }
 
         private void txtPaineRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (home == null) return;
-            home.RunPaine = (byte)txtPaineRun.Value;
+            if (paine == null) return;
+            paine.RunPaine = (byte)txtPaineRun.Value;
         }
 
 

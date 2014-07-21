@@ -12,9 +12,8 @@ namespace FFX_2
         int offset_percentage = 12;
         int offset_time = 16;
         int offset_guil = 30744;
-        int offset_run_yuna = 33328;
-        int offset_run_rikku = 33456;
-        int offset_run_paine = 33584;
+        
+        
         int offset_inventario = 31616;
         int offset_accessori = 32192;
 
@@ -37,42 +36,9 @@ namespace FFX_2
                 return this.file[offset_percentage];
             }
         }
-        public byte RunYuna
-        {
-            get
-            {
-                return this.file[offset_run_yuna];
-            }
-            set
-            {
-                this.file[offset_run_yuna] = value;
-                this.checksum.SetChecksum();
-            }
-        }
-        public byte RunRikku
-        {
-            get
-            {
-                return this.file[offset_run_rikku];
-            }
-            set
-            {
-                this.file[offset_run_rikku] = value;
-                this.checksum.SetChecksum();
-            }
-        }
-        public byte RunPaine
-        {
-            get
-            {
-                return this.file[offset_run_paine];
-            }
-            set
-            {
-                this.file[offset_run_paine] = value;
-                this.checksum.SetChecksum();
-            }
-        }
+        
+        
+        
         public int Time
         {
             get
