@@ -21,7 +21,7 @@ namespace FFX_2.Looksfere
             offset_yuna.Add(new Offset("8E2E", "1E"));
             offset_yuna.Add(new Offset("8E30", "C8"));
             offset_yuna.Add(new Offset("8E32", "0190"));
-            offset_yuna.Add(new Offset("8E34", "E7"));
+            offset_yuna.Add(new Offset("8E34", "03E7"));
             offset_yuna.Add(new Offset("924E", "1E"));
             offset_yuna.Add(new Offset("921C", "28"));
             offset_yuna.Add(new Offset("921E", "50"));
@@ -39,7 +39,7 @@ namespace FFX_2.Looksfere
             offset_rikku.Add(new Offset("94CE", "1E"));
             offset_rikku.Add(new Offset("94D0", "C8"));
             offset_rikku.Add(new Offset("94D2", "0190"));
-            offset_rikku.Add(new Offset("94D4", "E7"));
+            offset_rikku.Add(new Offset("94D4", "03E7"));
             offset_rikku.Add(new Offset("98EE", "1E"));
             offset_rikku.Add(new Offset("98BC", "28"));
             offset_rikku.Add(new Offset("98BE", "50"));
@@ -57,7 +57,7 @@ namespace FFX_2.Looksfere
             offset_paine.Add(new Offset("9B6E", "1E"));
             offset_paine.Add(new Offset("9B70", "C8"));
             offset_paine.Add(new Offset("9B72", "0190"));
-            offset_paine.Add(new Offset("9B74", "E7"));
+            offset_paine.Add(new Offset("9B74", "03E7"));
             offset_paine.Add(new Offset("9F8E", "1E"));
             offset_paine.Add(new Offset("9F5C", "28"));
             offset_paine.Add(new Offset("9F5E", "50"));
