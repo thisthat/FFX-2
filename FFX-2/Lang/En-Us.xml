@@ -13,14 +13,18 @@
     <name>SaveBtn</name>
     <value>Save</value>
   </string>
+  <string>
+    <name>Campains</name>
+    <value>Calm Lands</value>
+  </string>
   <!--HOME TAB -->
   <string>
     <name>Guil</name>
-    <value>Guil</value>
+    <value>Guil:</value>
   </string>
   <string>
     <name>Time</name>
-    <value>Time</value>
+    <value>Time:</value>
   </string>
   <string>
     <name>Item</name>
@@ -32,19 +36,23 @@
   </string>
   <string>
     <name>RunYuna</name>
-    <value>Run Yuna</value>
+    <value>Run Yuna:</value>
   </string>
   <string>
     <name>RunRikku</name>
-    <value>Run Rikku</value>
+    <value>Run Rikku:</value>
   </string>
   <string>
     <name>RunPaine</name>
-    <value>Run Paine</value>
+    <value>Run Paine:</value>
   </string>
   <string>
     <name>Percentual</name>
     <value>Completed</value>
+  </string>
+  <string>
+    <name>AllDress</name>
+    <value>Unlook all dresspheres</value>
   </string>
   <!-- UI YRP-->
   <string>
@@ -137,5 +145,34 @@
     <value>Full Throttle</value>
   </string>
 
+  <!-- Calm Land TAB-->
+  <string>
+    <name>Point</name>
+    <value>Points:</value>
+  </string>
+  <string>
+    <name>OpenAir</name>
+    <value>Open Air</value>
+  </string>
+  <string>
+    <name>Argent</name>
+    <value>Argent</value>
+  </string>
+  <string>
+    <name>WifeHunt</name>
+    <value>Wife Hunt</value>
+  </string>
+  <string>
+    <name>PointOpenAir</name>
+    <value>Points OpenAir</value>
+  </string>
+  <string>
+    <name>PointSilver</name>
+    <value>Points Argent</value>
+  </string>
+  <string>
+    <name>PointWife</name>
+    <value>Points Wife</value>
+  </string>
 
 </strings>

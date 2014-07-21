@@ -15,6 +15,7 @@ namespace FFX_2.Lang
         public const string WndTitle = "WndTitle";
         public const string LoadBtn = "LoadBtn";
         public const string SaveBtn = "SaveBtn";
+        public const string Campains = "Campains";
         public const string Guil = "Guil";
         public const string Time = "Time";
         public const string Item = "Item";
@@ -23,6 +24,7 @@ namespace FFX_2.Lang
         public const string RunRikku = "RunRikku";
         public const string RunPaine = "RunPaine";
         public const string Percentual = "Percentual";
+        public const string AllDress = "AllDress";
         public const string SelectAll = "SelectAll";
         public const string Stat = "Stat";
         public const string Gunner = "Gunner";
@@ -45,6 +47,14 @@ namespace FFX_2.Lang
         public const string FloralFallal = "FloralFallal";
         public const string MachinaMaw = "MachinaMaw";
         public const string FullThrottle = "FullThrottle";
+        //CALM LAND TAB
+        public const string Point = "Point";
+        public const string OpenAir = "OpenAir";
+        public const string Argent = "Argent";
+        public const string WifeHunt = "WifeHunt";
+        public const string PointOpenAir = "PointOpenAir";
+        public const string PointSilver = "PointSilver";
+        public const string PointWife = "PointWife";
 
         public string get(string key)
         {

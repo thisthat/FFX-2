@@ -115,13 +115,24 @@
     <Compile Include="CRC.cs" />
     <Compile Include="HandleEncript.cs" />
     <Compile Include="Lang\LangLoader.cs" />
-    <Compile Include="looksfere\Bandita.cs" />
-    <Compile Include="looksfere\Biancarcano.cs" />
-    <Compile Include="looksfere\Festaiola.cs" />
-    <Compile Include="looksfere\Guerriera.cs" />
-    <Compile Include="looksfere\Magipistolera.cs" />
-    <Compile Include="looksfere\Nerarcano.cs" />
-    <Compile Include="looksfere\Soubrette.cs" />
+    <Compile Include="Looksfere\Alchimista.cs" />
+    <Compile Include="Looksfere\Automastino.cs" />
+    <Compile Include="Looksfere\Bandita.cs" />
+    <Compile Include="Looksfere\Berserker.cs" />
+    <Compile Include="Looksfere\Biancarcano.cs" />
+    <Compile Include="Looksfere\CavaliereNero.cs" />
+    <Compile Include="Looksfere\DeaFortunata.cs" />
+    <Compile Include="Looksfere\Domatrice.cs" />
+    <Compile Include="Looksfere\Festaiola.cs" />
+    <Compile Include="Looksfere\Floralia.cs" />
+    <Compile Include="Looksfere\Guerriera.cs" />
+    <Compile Include="Looksfere\Magipistolera.cs" />
+    <Compile Include="Looksfere\Mascotte.cs" />
+    <Compile Include="Looksfere\Nerarcano.cs" />
+    <Compile Include="Looksfere\Psichica.cs" />
+    <Compile Include="Looksfere\Samurai.cs" />
+    <Compile Include="Looksfere\Soubrette.cs" />
+    <Compile Include="Looksfere\Suprema.cs" />
     <Compile Include="Personaggi\Paine.cs" />
     <Compile Include="Personaggi\Rikku.cs" />
     <Compile Include="Personaggi\Yuna.cs" />
@@ -136,9 +147,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GeneralOffset.cs" />
-    <Compile Include="looksfere\Looksfera.cs" />
-    <Compile Include="looksfere\Offset.cs" />
-    <Compile Include="looksfere\Pistolera.cs" />
+    <Compile Include="Looksfere\Looksfera.cs" />
+    <Compile Include="Looksfere\Offset.cs" />
+    <Compile Include="Looksfere\Pistolera.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -191,6 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+    <Resource Include="Img\Calm_Lands.png" />
     <Content Include="Lang\en-US.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

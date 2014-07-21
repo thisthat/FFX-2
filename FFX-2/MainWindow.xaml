@@ -377,8 +377,8 @@
 						Template="{StaticResource PieProgressTemplate}"
 						Value="0"
 						Minimum="0"
-						Maximum="1" Margin="0,0,35.334,43.929" Width="130" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
-					<Label x:Name="lblPercent" Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,11.05,-12.667,0" VerticalAlignment="Top" Width="162.667"/>
+						Maximum="1" Margin="0,0,35.334,53.267" Width="130" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+					<Label x:Name="lblPercent" Content="Completamento" HorizontalAlignment="Left" Height="24" Margin="305,1.712,-12.667,0" VerticalAlignment="Top" Width="162.667"/>
 					<xctk:DecimalUpDown x:Name="txtYunaRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,115.664,0,0" Width="130.667" Watermark="Fughe Yuna" ValueChanged="txtYunaRun_ValueChanged" />
 					<xctk:DecimalUpDown x:Name="txtRikkuRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,143.664,0,0" Width="130.667" Watermark="Fughe Rikku" ValueChanged="txtRikkuRun_ValueChanged" />
 					<xctk:DecimalUpDown x:Name="txtPaineRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="74,171.664,0,0" Width="130.667" Watermark="Fughe Paine" ValueChanged="txtPaineRun_ValueChanged" />
@@ -390,6 +390,7 @@
 					<xctk:DecimalUpDown x:Name="txtSS" Increment="1" Maximum="59" Minimum="0" Watermark="ss" HorizontalAlignment="Left" Height="20.004" Margin="170,48.996,0,0" VerticalAlignment="Top" Width="34.667"  HorizontalContentAlignment="Left" Style="{DynamicResource DecimalUpDownStyle1}" ValueChanged="handleTime"/>
 					<xctk:DecimalUpDown x:Name="txtMM" Increment="1" Maximum="59" Minimum="0" Watermark="mm" HorizontalAlignment="Left" Height="20.004" Margin="125.667,48.976,0,0" VerticalAlignment="Top" Width="44.333" HorizontalContentAlignment="Left" Style="{DynamicResource DecimalUpDownStyle1}" RenderTransformOrigin="0.663,0.534" ValueChanged="handleTime"/>
 					<Label Content="this_that :: this_that@hotmail.it" HorizontalAlignment="Left" Height="20" Margin="321.008,189.668,-37.341,0" VerticalAlignment="Top" Width="171.333" FontSize="9.333" Style="{DynamicResource LabelStyle1}"/>
+					<CheckBox x:Name="chkLooksfera" Content="Tutte le looksfere" HorizontalAlignment="Left" Height="18.004" Margin="289.666,170.184,0,0" VerticalAlignment="Top" Width="147.001" Checked="chkLooksfera_Checked"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Yuna">
@@ -475,6 +476,29 @@
 						</Grid>
 					</GroupBox>
 					<GroupBox x:Name="frmPaineStat" Header="Statistiche -- Offset Da trovare" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="headFrameCampain" Header="Campagne">
+				<Grid>
+					<Image HorizontalAlignment="Left" Height="235.999" VerticalAlignment="Top" Width="455" Source="Img/Calm_Lands.png" Margin="0,0,0,-19.666" StretchDirection="DownOnly" Stretch="UniformToFill" Opacity="0.295"/>
+					<GroupBox x:Name="frmSposa" Header="Sposa" HorizontalAlignment="Left" Height="126" Margin="312,34,0,0" VerticalAlignment="Top" Width="137.667">
+						<Grid HorizontalAlignment="Left" Height="109.667" Margin="0,-0.627,-6,-6" VerticalAlignment="Top" Width="131.667">
+							<Label x:Name="lblPointSposa" Content="Punti:" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="100.667"/>
+                            <xctk:DecimalUpDown Increment="1" Maximum="255" Minimum="0" x:Name="txtPointSposa" Margin="8.666,42.664,11.334,43.003" Watermark="Punti Sposa"  ValueChanged="txtPointSposa_ValueChanged"/>
+						</Grid>
+					</GroupBox>
+					<GroupBox x:Name="frmAzzurro" Header="Azzurro Co." HorizontalAlignment="Left" Height="126" Margin="10,34,0,0" VerticalAlignment="Top" Width="137.667">
+						<Grid HorizontalAlignment="Left" Height="109.667" Margin="0,-0.627,-6,-6" VerticalAlignment="Top" Width="131.667">
+							<Label x:Name="lblPointAzzurro" Content="Punti:" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="100.667"/>
+							<xctk:DecimalUpDown Increment="1" Maximum="65535" Minimum="0" x:Name="txtPointAzzurro" Margin="8.666,42.664,11.334,43.003" Watermark="Punti Azzurro" ValueChanged="txtPointAzzurro_ValueChanged"/>
+						</Grid>
+					</GroupBox>
+					<GroupBox x:Name="frmArgento" Header="Argento Co." HorizontalAlignment="Left" Height="126" Margin="161.333,34,0,0" VerticalAlignment="Top" Width="137.667">
+						<Grid HorizontalAlignment="Left" Height="109.667" Margin="0,-0.627,-6,-6" VerticalAlignment="Top" Width="131.667">
+							<Label x:Name="lblPointArgento" Content="Punti:" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="100.667"/>
+                            <xctk:DecimalUpDown Increment="1" Maximum="65535" Minimum="0" x:Name="txtPointArgento" Margin="8.666,42.664,11.334,43.003" Watermark="Punti Argento"  ValueChanged="txtPointArgento_ValueChanged"/>
+						</Grid>
+					</GroupBox>
 				</Grid>
 			</TabItem>
 		</TabControl>

@@ -48,8 +48,8 @@ namespace FFX_2.looksfere
         {
             offset_paine.Add(new Offset("9EA8", "1E"));
             offset_paine.Add(new Offset("9E9C", "1E"));
-            offset_paine.Add(new Offset("9EAE", "1E"));
-            offset_paine.Add(new Offset("980C", "28"));
+            offset_paine.Add(new Offset("9EA2", "1E"));
+            offset_paine.Add(new Offset("9EAE", "28"));
             offset_paine.Add(new Offset("9ECA", "1E"));
             offset_paine.Add(new Offset("9EC8", "1E"));
             offset_paine.Add(new Offset("9ECE", "1E"));

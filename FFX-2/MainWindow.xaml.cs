@@ -1,5 +1,6 @@
 ﻿using FFX_2.Lang;
 using FFX_2.looksfere;
+using FFX_2.Looksfere;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,17 +46,29 @@ namespace FFX_2
         //Dresspheres
         Pistolera pistolera = new Pistolera();
         Magipistolera maginistolera = new Magipistolera();
+        Alchimista alchimista = new Alchimista();
         Guerriera guerriera = new Guerriera();
+        Samurai samurai = new Samurai();
+        CavaliereNero cavalierenero = new CavaliereNero();
+        Berserker berserker = new Berserker();
         Soubrette soubrette = new Soubrette();
         Nerarcano nerarcano = new Nerarcano();
         Biancarcano biancarcano = new Biancarcano();
         Bandita bandita = new Bandita();
+        Domatrice domatrice = new Domatrice();
+        DeaFortunata deafortunata = new DeaFortunata();
+        Mascotte mascotte = new Mascotte();
+        Psichica psichica = new Psichica();
         Festaiola festaiola = new Festaiola();
+
+        Floralia floralia = new Floralia();
+        Automastino automastino = new Automastino();
+        Suprema suprema = new Suprema();
 
         public MainWindow()
         {
             InitializeComponent();
-            
+
             System.Threading.Thread.Sleep(1000);
             //Lang Loader
             up = new Updater();
@@ -81,6 +94,7 @@ namespace FFX_2
             //this.Title = lang.get(LangLoader.WndTitle);
             this.btnLoad.Content = lang.get(LangLoader.LoadBtn);
             this.btnSave.Content = lang.get(LangLoader.SaveBtn);
+            this.headFrameCampain.Header = lang.get(LangLoader.Campains);
             //Home TAB
             this.lblPercent.Content = lang.get(LangLoader.Percentual);
             this.lblGuil.Content = lang.get(LangLoader.Guil);
@@ -94,6 +108,7 @@ namespace FFX_2
             this.txtPaineRun.Watermark = lang.get(LangLoader.RunPaine);
             this.chkAccessori.Content = lang.get(LangLoader.Accessories);
             this.chkInventario.Content = lang.get(LangLoader.Item);
+            this.chkLooksfera.Content = lang.get(LangLoader.AllDress);
             //YUNA TAB
             this.frmYunaStat.Header = lang.get(LangLoader.Stat);
             this.btn_sel_yuna.Content = lang.get(LangLoader.SelectAll);
@@ -157,6 +172,16 @@ namespace FFX_2
             this.mascotte_paine.Content = lang.get(LangLoader.Mascot);
             this.suprema_paine.Content = lang.get(LangLoader.FullThrottle);
 
+            //CALM LAND TAB
+            this.frmAzzurro.Header = lang.get(LangLoader.OpenAir);
+            this.frmArgento.Header = lang.get(LangLoader.Argent);
+            this.frmSposa.Header = lang.get(LangLoader.WifeHunt);
+            this.lblPointAzzurro.Content = lang.get(LangLoader.Point);
+            this.lblPointArgento.Content = lang.get(LangLoader.Point);
+            this.lblPointSposa.Content = lang.get(LangLoader.Point);
+            this.txtPointAzzurro.Watermark = lang.get(LangLoader.PointOpenAir);
+            this.txtPointArgento.Watermark = lang.get(LangLoader.PointSilver);
+            this.txtPointSposa.Watermark = lang.get(LangLoader.PointWife);
         }
         #endregion
         #region "UI Base"
@@ -168,6 +193,7 @@ namespace FFX_2
         //Select all the dresspheres YUNA
         private void btn_sel_yuna_Click(object sender, RoutedEventArgs e)
         {
+            if (home == null) { return; }
             CheckBox tmp = null;
             UIElementCollection controls = grid_looksfere_yuna.Children;
             foreach (Control c in controls)
@@ -182,6 +208,7 @@ namespace FFX_2
         //Select all the dresspheres RIKKU
         private void btn_sel_rikku_Click(object sender, RoutedEventArgs e)
         {
+            if (home == null) { return; }
             CheckBox tmp = null;
             UIElementCollection controls = grid_looksfere_rikku.Children;
             foreach (Control c in controls)
@@ -196,6 +223,7 @@ namespace FFX_2
         //Select all the dresspheres PAINE
         private void btn_sel_paine_Click(object sender, RoutedEventArgs e)
         {
+            if (home == null) { return; }
             CheckBox tmp = null;
             UIElementCollection controls = grid_looksfere_paine.Children;
             foreach (Control c in controls)
@@ -236,6 +264,9 @@ namespace FFX_2
             txtYunaRun.Value = home.RunYuna;
             txtRikkuRun.Value = home.RunRikku;
             txtPaineRun.Value = home.RunPaine;
+            txtPointArgento.Value = home.PointArgento;
+            txtPointAzzurro.Value = home.PointAzzurro;
+            txtPointSposa.Value = home.PointSposa;
         }
 
         //Ripristinate UI after save the file
@@ -260,7 +291,8 @@ namespace FFX_2
             txtChecksum.Text = "";
             chkAccessori.IsEnabled = true;
             chkInventario.IsEnabled = true;
-            chkAccessori.IsChecked = chkInventario.IsChecked = false;
+            chkLooksfera.IsEnabled = true;
+            chkAccessori.IsChecked = chkInventario.IsChecked = chkLooksfera.IsChecked = false;
             //TAB YUNA
             CheckBox tmp;
             UIElementCollection controls;
@@ -296,6 +328,10 @@ namespace FFX_2
                     tmp.IsEnabled = true;
                 }
             }
+            //TAB CALM LAND
+            txtPointArgento.Text = "";
+            txtPointAzzurro.Text = "";
+            txtPointSposa.Text = "";
         }
 
         //What to do if we load a save? 
@@ -350,9 +386,9 @@ namespace FFX_2
             {
                 handleExternalProccess.Encript();
             }
-            handleExternalProccess.Dispose(); 
+            handleExternalProccess.Dispose();
         }
-        
+
         #endregion
         #region "Handle UI w/ File"
         private void txtGuil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -377,6 +413,14 @@ namespace FFX_2
             home.setAccessori();
         }
 
+        private void chkLooksfera_Checked(object sender, RoutedEventArgs e)
+        {
+            if (home == null) { chkLooksfera.IsChecked = false; return; }
+            chkLooksfera.IsEnabled = false;
+            home.setAllLooksfere();
+        }
+
+
         private void txtYunaRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (home == null) return;
@@ -395,6 +439,21 @@ namespace FFX_2
             home.RunPaine = (byte)txtPaineRun.Value;
         }
 
+        private void txtPointAzzurro_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            home.PointAzzurro = (int)txtPointAzzurro.Value;
+        }
+        private void txtPointArgento_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            home.PointArgento = (int)txtPointArgento.Value;
+        }
+        private void txtPointSposa_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (home == null) return;
+            home.PointSposa = (byte)txtPointSposa.Value;
+        }
 
         void handleTime(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -407,6 +466,8 @@ namespace FFX_2
             home.Time = second;
         }
 
+
+        #region "LookSfere"
         private void lookSferaYuna_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
             handleLooksfera(sender, Looksfera.YRP.YUNA);
@@ -428,30 +489,33 @@ namespace FFX_2
             string id = look.Name.Split('_')[0];
             switch (id)
             {
-                case Looksfera.ALCHIMISTA: break;
+                case Looksfera.ALCHIMISTA: alchimista.write(file, pg); break;
+                case Looksfera.AUTOMASTINO: automastino.write(file); break;
                 case Looksfera.BANDITA: bandita.write(file, pg); break;
-                case Looksfera.BERSERKER: break;
+                case Looksfera.BERSERKER: berserker.write(file, pg); break;
                 case Looksfera.BIANCARCANO: biancarcano.write(file, pg); break;
-                case Looksfera.CAVALIERE_NERO: break;
-                case Looksfera.DEA_FORTUNATA: break;
-                case Looksfera.DOMATRICE: break;
+                case Looksfera.CAVALIERE_NERO: cavalierenero.write(file, pg); break;
+                case Looksfera.DEA_FORTUNATA: deafortunata.write(file, pg); break;
+                case Looksfera.DOMATRICE: domatrice.write(file, pg); break;
                 case Looksfera.FESTAIOLA: festaiola.write(file, pg); break;
-                case Looksfera.FLORALIA: break;
+                case Looksfera.FLORALIA: floralia.write(file); break;
                 case Looksfera.GUERRIERA: guerriera.write(file, pg); break;
                 case Looksfera.MAGIPISTOLERA: maginistolera.write(file, pg); break;
-                case Looksfera.MASCOTTE: break;
+                case Looksfera.MASCOTTE: mascotte.write(file, pg); break;
                 case Looksfera.NERARCANO: nerarcano.write(file, pg); break;
                 case Looksfera.PISTOLERA: pistolera.write(file, pg); break;
-                case Looksfera.PSICHICA: break;
-                case Looksfera.SAMURAI: break;
+                case Looksfera.PSICHICA: psichica.write(file, pg); break;
+                case Looksfera.SAMURAI: samurai.write(file, pg); break;
                 case Looksfera.SOUBRETTE: soubrette.write(file, pg); break;
+                case Looksfera.SUPREMA: suprema.write(file); break;
                 default: break;
             }
             checksum.SetChecksum();
             look.IsEnabled = false;
         }
 
-        #region "LookSfere"
+       
+        
 
 
         #endregion

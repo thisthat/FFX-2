@@ -25,6 +25,17 @@ namespace FFX_2
         {
             return b.ToString("X4");
         }
+        public static string Int2HexPad4(int b)
+        {
+            string hex = b.ToString("X4");
+            int d = 4 - hex.Length;
+            string pad = "";
+            for (int i = 0; i < d; i++)
+            {
+                pad += "0";
+            }
+            return pad + hex;
+        }
         public static string Guil2Hex(int guil)
         {
             string hex = guil.ToString("X4");

@@ -58,9 +58,19 @@ namespace FFX_2.looksfere
             foreach (Offset off in offset)
             {
                 int search = FFX_2.Utility.Hex2Dec(off.Search);
-                byte value = FFX_2.Utility.Hex2Byte(off.Value);
-                //if (LastPoint) { value--; }
-                file[search] = value;
+                if (off.Value.Length > 2)
+                {
+                    byte _b1 = FFX_2.Utility.Hex2Byte(off.Value.Substring(0, 2));
+                    byte _b2 = FFX_2.Utility.Hex2Byte(off.Value.Substring(2, 2));
+                    file[search + 0] = _b1;
+                    file[search + 1] = _b2;
+                }
+                else
+                {
+                    byte value = FFX_2.Utility.Hex2Byte(off.Value);
+                    //if (LastPoint) { value--; }
+                    file[search] = value;
+                }
             }
             return file;
         }

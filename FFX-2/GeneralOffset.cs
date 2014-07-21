@@ -17,7 +17,15 @@ namespace FFX_2
         int offset_run_paine = 33584;
         int offset_inventario = 31616;
         int offset_accessori = 32192;
-
+        int offset_point_argento = 0xDE8; //Due Byte
+        int offset_point_azzurro = 0xDE4; //Due Byte
+        int offset_sposa = 0xDEC;
+        int offset_init_looksfere = 0x784D;
+        int offset_end_looksfere = 0x785C;
+        int offset_looksfere_special = 0x785E;
+        int offset_floralia = 0x7861;
+        int offset_automastino = 0x7868;
+        int offset_suprema = 0x7869;
         byte[] file;
         string path;
 
@@ -29,7 +37,54 @@ namespace FFX_2
             this.path = p;
             this.checksum = checksum;
         }
-
+        public int PointAzzurro
+        {
+            get
+            {
+                string _b2 = Utility.Byte2Hex(this.file[offset_point_azzurro + 0]);
+                string _b1 = Utility.Byte2Hex(this.file[offset_point_azzurro + 1]);
+                return Utility.Hex2Dec(_b1 + _b2);
+            }
+            set
+            {
+                string hex = Utility.Int2HexPad4(value);
+                string _b2 = hex.Substring(0, 2);
+                string _b1 = hex.Substring(2, 2);
+                this.file[offset_point_azzurro + 0] = Utility.Hex2Byte(_b1);
+                this.file[offset_point_azzurro + 1] = Utility.Hex2Byte(_b2);
+                this.checksum.SetChecksum();
+            }
+        }
+        public int PointArgento
+        {
+            get
+            {
+                string _b2 = Utility.Byte2Hex(this.file[offset_point_argento + 0]);
+                string _b1 = Utility.Byte2Hex(this.file[offset_point_argento + 1]);
+                return Utility.Hex2Dec(_b1 + _b2);
+            }
+            set
+            {
+                string hex = Utility.Int2HexPad4(value);
+                string _b2 = hex.Substring(0, 2);
+                string _b1 = hex.Substring(2, 2);
+                this.file[offset_point_argento + 0] = Utility.Hex2Byte(_b1);
+                this.file[offset_point_argento + 1] = Utility.Hex2Byte(_b2);
+                this.checksum.SetChecksum();
+            }
+        }
+        public byte PointSposa
+        {
+            get
+            {
+                return this.file[offset_sposa];
+            }
+            set
+            {
+                this.file[offset_sposa] = value;
+                this.checksum.SetChecksum();
+            }
+        }
         public int Percentage
         {
             get
@@ -147,6 +202,19 @@ namespace FFX_2
                 file[start] = 99;
                 start++;
             }
+            this.checksum.SetChecksum();
+        }
+
+        public void setAllLooksfere()
+        {
+            for (int i = offset_init_looksfere; i < offset_end_looksfere; i++)
+            {
+                file[i] = 1;
+            }
+            file[offset_looksfere_special] = 1;
+            file[offset_floralia] = 1;
+            file[offset_automastino] = 1;
+            file[offset_suprema] = 1;
             this.checksum.SetChecksum();
         }
 
