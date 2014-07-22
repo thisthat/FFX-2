@@ -507,6 +507,28 @@ namespace FFX_2
             if (yuna == null) return;
             yuna.MPYuna = (int)txtMPYuna.Value;
         }
+        private void txtHPRikku_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (rikku == null) return;
+            rikku.HPRikku = (int)txtHPRikku.Value;
+        }
+        private void txtMPRikku_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (rikku == null) return;
+            rikku.MPRikku = (int)txtMPRikku.Value;
+        }
+
+        private void txtHPPaine_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (paine == null) return;
+            paine.HPPaine = (int)txtHPPaine.Value;
+        }
+
+        private void txtMPPaine_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (paine == null) return;
+            paine.MPPaine = (int)txtMPPaine.Value;
+        }
         private void txtYunaRun_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (yuna == null) return;
@@ -579,11 +601,9 @@ namespace FFX_2
 
         #endregion
 
-        
-
-        
 
         #endregion
+        
         
     }
 }

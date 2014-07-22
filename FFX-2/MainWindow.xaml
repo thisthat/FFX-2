@@ -453,9 +453,9 @@
 					</GroupBox>
 					<GroupBox x:Name="frmRikkuStat" Header="Statistiche" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188">
 						<Grid HorizontalAlignment="Left" Height="183.661" Margin="-1,-2.621,-6,-6" VerticalAlignment="Top" Width="183">
-							<xctk:DecimalUpDown x:Name="txtMPRikku" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Rikku" ValueChanged="txtYunaRun_ValueChanged" />
+							<xctk:DecimalUpDown x:Name="txtMPRikku" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Rikku" ValueChanged="txtMPRikku_ValueChanged" />
 							<Label x:Name="lblMPYuna1" Content="MP:" HorizontalAlignment="Left" Height="26" Margin="0,34.664,0,0" VerticalAlignment="Top" Width="99"/>
-							<xctk:DecimalUpDown x:Name="txtHPRikku" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Rikku" ValueChanged="txtYunaRun_ValueChanged" />
+							<xctk:DecimalUpDown x:Name="txtHPRikku" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Rikku" ValueChanged="txtHPRikku_ValueChanged" />
 							<Label x:Name="lblHPYuna1" Content="HP:" HorizontalAlignment="Left" Height="26" Margin="0,10,0,0" VerticalAlignment="Top" Width="86.832"/>
 							<xctk:DecimalUpDown x:Name="txtRikkuRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,148.661,0,0" Width="104.331" Watermark="Fughe Rikku" ValueChanged="txtRikkuRun_ValueChanged" />
 							<Label x:Name="lblRunRikku" Content="Fuga Rikku:" HorizontalAlignment="Left" Height="26" Margin="0,146.661,0,0" VerticalAlignment="Top" Width="99"/>
@@ -490,9 +490,9 @@
 					</GroupBox>
 					<GroupBox x:Name="frmPaineStat" Header="Statistiche" HorizontalAlignment="Left" Height="198" Margin="256,-1.339,0,0" VerticalAlignment="Top" Width="188">
 						<Grid HorizontalAlignment="Left" Height="183.661" Margin="-1,-2.621,-6,-6" VerticalAlignment="Top" Width="183">
-							<xctk:DecimalUpDown x:Name="txtMPPaine" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Paine" ValueChanged="txtYunaRun_ValueChanged" />
+							<xctk:DecimalUpDown x:Name="txtMPPaine" FormatString="N0" Increment="1" Maximum="999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,36.664,0,0" Width="104.331" Watermark="MP Paine" ValueChanged="txtMPPaine_ValueChanged" />
 							<Label x:Name="lblMPYuna2" Content="MP:" HorizontalAlignment="Left" Height="26" Margin="0,34.664,0,0" VerticalAlignment="Top" Width="99"/>
-							<xctk:DecimalUpDown x:Name="txtHPPaine" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Paine" ValueChanged="txtYunaRun_ValueChanged" />
+							<xctk:DecimalUpDown x:Name="txtHPPaine" FormatString="N0" Increment="1" Maximum="99999" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,12,0,0" Width="104.331" Watermark="HP Paine" ValueChanged="txtHPPaine_ValueChanged" />
 							<Label x:Name="lblHPYuna2" Content="HP:" HorizontalAlignment="Left" Height="26" Margin="0,10,0,0" VerticalAlignment="Top" Width="86.832"/>
 							<xctk:DecimalUpDown x:Name="txtPaineRun" FormatString="N0" Increment="1" Maximum="255" Minimum="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" Margin="68.669,148.661,0,0" Width="104.331" Watermark="Fughe Paine" ValueChanged="txtPaineRun_ValueChanged" />
 							<Label x:Name="lblRunPaine" Content="Fuga Paine:" HorizontalAlignment="Left" Height="26" Margin="0,146.661,0,0" VerticalAlignment="Top" Width="86.584"/>
