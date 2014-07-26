@@ -24,7 +24,7 @@ namespace FFX_2
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             version = fileVersionInfo.ProductVersion;
             CultureInfo ci = CultureInfo.InstalledUICulture;
-            lang = "&l=" + ci.Name;
+            lang = "&l=" + ci.TwoLetterISOLanguageName;
             WebClient client = new WebClient();
             try
             {
