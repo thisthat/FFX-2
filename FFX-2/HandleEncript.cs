@@ -28,6 +28,7 @@ namespace FFX_2
             p.StartInfo.FileName = @"pfdtool.exe";
             p.StartInfo.Arguments = " -g BLES01880 -d \"" + path + "\"  SAVES";
             Console.WriteLine(" -g BLES01880 -d \"" + path + "\"  SAVES");
+            p.StartInfo.CreateNoWindow = true;
             p.Start();
             // Do not wait for the child process to exit before
             // reading to the end of its redirected stream.
@@ -47,6 +48,7 @@ namespace FFX_2
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.FileName = @"pfdtool.exe";
             p.StartInfo.Arguments = " -g BLES01880 -e \"" + path + "\"  SAVES";
+            p.StartInfo.CreateNoWindow = true;
             p.Start();
             // Do not wait for the child process to exit before
             // reading to the end of its redirected stream.
