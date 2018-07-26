@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -70,9 +71,13 @@ namespace FFX_2
         Automastino automastino = new Automastino();
         Suprema suprema = new Suprema();
 
+        [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlAppDomain)]
         public MainWindow()
         {
             InitializeComponent();
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(LogInfo);
 
             System.Threading.Thread.Sleep(1000);
             //Lang Loader
@@ -85,6 +90,20 @@ namespace FFX_2
             if (key == null)
             {
                 key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("TTFFX-2");
+            }
+        }
+
+        private void LogInfo(object sender, UnhandledExceptionEventArgs e)
+        {
+            string filePath = @"Log.txt";
+            Exception ex = (Exception)e.ExceptionObject;
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine("Message :" + ex.Message + Environment.NewLine + "StackTrace :" + ex.StackTrace + Environment.NewLine);
+                writer.WriteLine(e.ToString());
+                writer.WriteLine("Type: " + e.GetType());
+                writer.WriteLine(ex.TargetSite);
+                writer.WriteLine(Environment.NewLine + "-----------------------------------------------------------------------------" + Environment.NewLine);
             }
         }
 
@@ -380,7 +399,7 @@ namespace FFX_2
             //Little Check
             if (!File.Exists(filename))
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Errore, selezionare una cartella con i saves di FFX-2 HD", "Cartella non valida", MessageBoxButton.OK, MessageBoxImage.Error);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Error, please select a folder containing the saves of FFX-2 HD", "Folder not valid", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //Se arriviamo qua, i files esistono e dobbiamo decriptarli
@@ -428,7 +447,9 @@ namespace FFX_2
         private void txtGuil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (home == null) return;
-            var guil = Convert.ToInt32(txtGuil.Text.Replace(".", ""));
+            var val = txtGuil.Text.Replace(".", "");
+            val = val.Replace(",", "");
+            var guil = Convert.ToInt32(val);
             home.Guil = guil;
         }
 
